@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ControllerNome">
+   <children>
+      <TextArea fx:id="player1" layoutX="331.0" layoutY="80.0" prefHeight="40.0" prefWidth="200.0" />
+      <TextArea fx:id="player2" layoutX="331.0" layoutY="140.0" prefHeight="40.0" prefWidth="200.0" />
+      <TextArea fx:id="player3" layoutX="331.0" layoutY="200.0" prefHeight="40.0" prefWidth="200.0" />
+      <TextArea fx:id="player4" layoutX="331.0" layoutY="260.0" prefHeight="40.0" prefWidth="200.0" />
+      <Button fx:id="btnStart" layoutX="246.0" layoutY="345.0" mnemonicParsing="false" text="Começar Jogo" />
+      <Label layoutX="97.0" layoutY="100.0" text="Jogador 1" />
+      <Label layoutX="97.0" layoutY="153.0" text="Jogador 2" />
+      <Label fx:id="lblPlayer3" layoutX="97.0" layoutY="213.0" text="Jogador 3" />
+      <Label fx:id="lblPlayer4" layoutX="97.0" layoutY="273.0" text="Jogador 4" />
+      <Label layoutX="163.0" layoutY="22.0" text="Escolha o nome dos jogadores" wrapText="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>

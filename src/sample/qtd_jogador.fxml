@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ControllerJogador">
+   <children>
+      <Button fx:id="btnContinue" layoutX="250.0" layoutY="300.0" mnemonicParsing="false" text="Avançar" />
+      <ChoiceBox fx:id="choicePlayer" layoutX="350.0" layoutY="150.0" prefWidth="150.0" />
+      <Label alignment="CENTER" layoutX="79.0" layoutY="143.0" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: white;" text="Escolha a quantidade de jogadores" wrapText="true" />
+   </children>
+</Pane>
