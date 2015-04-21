@@ -25,22 +25,10 @@ import java.util.ResourceBundle;
 public class ControllerNome implements Initializable{
 
     @FXML
-    private TextArea player1;
+    private TextArea player1, player2, player3, player4;
 
     @FXML
-    private TextArea player2;
-
-    @FXML
-    private TextArea player3;
-
-    @FXML
-    private TextArea player4;
-
-    @FXML
-    private Label lblPlayer3;
-
-    @FXML
-    private Label lblPlayer4;
+    private Label lblPlayer3, lblPlayer4;
 
     @FXML
     private Button btnStart;
@@ -51,8 +39,7 @@ public class ControllerNome implements Initializable{
     @Override
     public void initialize(URL url, final ResourceBundle resourceBundle) {
 
-        System.out.println(ControllerJogador.parameters);
-
+        //elimina jogadores nao existentes e ajusta posicao dos existentes
         if (ControllerJogador.parameters.equals("2")){
             lblPlayer3.setVisible(false);
             player3.setVisible(false);
@@ -67,7 +54,6 @@ public class ControllerNome implements Initializable{
         btnStart.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-
                 try {
                     //popular array com valores de nomes
                     parameters.add(player1.getText());
