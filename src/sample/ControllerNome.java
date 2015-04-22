@@ -54,19 +54,20 @@ public class ControllerNome implements Initializable{
         btnStart.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                try {
-                    //popular array com valores de nomes
-                    parameters.add(player1.getText());
-                    parameters.add(player2.getText());
-                    parameters.add(player3.getText());
-                    parameters.add(player4.getText());
 
-                    Parent root;
+                //popular array com valores de nomes
+                parameters.add(player1.getText());
+                parameters.add(player2.getText());
+                parameters.add(player3.getText());
+                parameters.add(player4.getText());
+
+                Parent root;
                     try {
                         root = FXMLLoader.load(getClass().getClassLoader().getResource("sample/quiz.fxml"), resourceBundle);
                         Stage stage = new Stage();
                         stage.setTitle("Viracopos");
                         stage.setScene(new Scene(root, 800, 600));
+                        stage.setResizable(false);
                         stage.show();
 
                         //esconder janela atual
@@ -75,10 +76,6 @@ public class ControllerNome implements Initializable{
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
 
             }
         });

@@ -52,6 +52,7 @@ public class ControllerJogador implements Initializable{
                     Stage stage = new Stage();
                     stage.setTitle("Viracopos");
                     stage.setScene(new Scene(root, 600, 400));
+                    stage.setResizable(false);
                     stage.show();
 
                     //esconder janela atual

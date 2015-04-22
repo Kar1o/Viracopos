@@ -9,18 +9,18 @@
    <children>
       <TextArea fx:id="question" layoutX="260.0" layoutY="140.0" prefHeight="280.0" prefWidth="480.0" />
       <Button fx:id="confirm" layoutX="600.0" layoutY="510.0" mnemonicParsing="false" text="Confirma" />
-      <Label fx:id="name1" layoutX="75.0" layoutY="50.0" text="Label" />
-      <Label fx:id="name2" layoutX="265.0" layoutY="50.0" text="Label" />
-      <Label fx:id="name3" layoutX="450.0" layoutY="50.0" text="Label" />
-      <Label fx:id="name4" layoutX="650.0" layoutY="50.0" text="Label" />
+      <Label fx:id="name1" layoutX="75.0" layoutY="45.0" text="Label" />
+      <Label fx:id="name2" layoutX="265.0" layoutY="45.0" text="Label" />
+      <Label fx:id="name3" layoutX="450.0" layoutY="45.0" text="Label" />
+      <Label fx:id="name4" layoutX="650.0" layoutY="45.0" text="Label" />
       <ImageView fx:id="pictureQuestion" fitHeight="150.0" fitWidth="170.0" layoutX="50.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true" />
       <RadioButton fx:id="option1" layoutX="50.0" layoutY="480.0" mnemonicParsing="false" text="A" />
       <RadioButton fx:id="option2" layoutX="50.0" layoutY="540.0" mnemonicParsing="false" text="C" />
       <RadioButton fx:id="option3" layoutX="300.0" layoutY="480.0" mnemonicParsing="false" text="B" />
       <RadioButton fx:id="option4" layoutX="300.0" layoutY="540.0" mnemonicParsing="false" text="D" />
-      <Label fx:id="score1" layoutX="75.0" layoutY="74.0" text="Label" />
-      <Label fx:id="score2" layoutX="265.0" layoutY="74.0" text="Label" />
-      <Label fx:id="score3" layoutX="450.0" layoutY="74.0" text="Label" />
-      <Label fx:id="score4" layoutX="650.0" layoutY="74.0" text="Label" />
+      <Label fx:id="score1" layoutX="75.0" layoutY="75.0" text="Label" />
+      <Label fx:id="score2" layoutX="265.0" layoutY="75.0" text="Label" />
+      <Label fx:id="score3" layoutX="450.0" layoutY="75.0" text="Label" />
+      <Label fx:id="score4" layoutX="650.0" layoutY="75.0" text="Label" />
    </children>
 </Pane>

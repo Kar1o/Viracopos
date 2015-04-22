@@ -14,6 +14,7 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("qtd_jogador.fxml"));
         stage.setTitle("Viracopos");
         stage.setScene(new Scene(root, 600, 450));
+        stage.setResizable(false);
         stage.show();
     }
 
