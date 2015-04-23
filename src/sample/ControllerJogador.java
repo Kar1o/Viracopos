@@ -38,7 +38,7 @@ public class ControllerJogador implements Initializable{
                 "2", "3", "4"
         ));
 
-        choicePlayer.setValue("2");
+        choicePlayer.getSelectionModel().selectFirst();
         choicePlayer.setTooltip(new Tooltip(choicePlayer.getValue().toString() + "jogadores"));
 
         btnContinue.setOnAction(new EventHandler<ActionEvent>() {
@@ -51,7 +51,7 @@ public class ControllerJogador implements Initializable{
                     root = FXMLLoader.load(getClass().getClassLoader().getResource("sample/nome_jogador.fxml"), resourceBundle);
                     Stage stage = new Stage();
                     stage.setTitle("Viracopos");
-                    stage.setScene(new Scene(root, 600, 400));
+                    stage.setScene(new Scene(root, 600, 450));
                     stage.setResizable(false);
                     stage.show();
 

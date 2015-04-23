@@ -5,15 +5,11 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.text.Text;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
@@ -47,10 +43,14 @@ public class ControllerQuiz implements Initializable{
 
     private List<String> answers = new ArrayList<String>();
 
-    int currentQuestion;
+    int currentQuestion, currentPlayer, totalPlayer;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        //seta a quantidade total de jogadores
+        totalPlayer = Integer.parseInt(ControllerJogador.parameters);
+        System.out.println(totalPlayer);
 
         //elimina jogadores e placares nao existentes e ajusta posicao dos existentes
         if (ControllerJogador.parameters.equals("2")){
@@ -74,12 +74,6 @@ public class ControllerQuiz implements Initializable{
             score3.setLayoutX(600);
         }
 
-        //starta pontos para cada jogador
-        scoreValue1 = 0;
-        scoreValue2 = 0;
-        scoreValue3 = 0;
-        scoreValue4 = 0;
-
         //seta o nome dos jogadores
         name1.setText(ControllerNome.parameters.get(0));
         name2.setText(ControllerNome.parameters.get(1));
@@ -91,6 +85,12 @@ public class ControllerQuiz implements Initializable{
         option2.setToggleGroup(group);
         option3.setToggleGroup(group);
         option4.setToggleGroup(group);
+
+        //starta pontos de cada jogador
+        scoreValue1 = 0;
+        scoreValue2 = 0;
+        scoreValue3 = 0;
+        scoreValue4 = 0;
 
         changeScore();
 
@@ -105,16 +105,33 @@ public class ControllerQuiz implements Initializable{
                 //confere se uma resposta foi escolhida
                 if (option1.isSelected() || option2.isSelected() || option3.isSelected() || option4.isSelected()){
 
-                    //atribui ponto para jogador se resposta for certa
-                    /*if (group.getSelectedToggle().getProperties().toString().equals(questions[currentQuestion][1])){
-                        System.out.println("Resposta certa");
-                    }*/
-                    //escolhe nova pergunta aleatoria
+                    //recebe o nome do RadioButton selecionado
+                    String selectedRadio = group.getSelectedToggle().toString().substring(15, 22);
+                    if (selectedRadio.equals("option1")) {
+                        if (option1.isSelected() && option1.getText().equals(questions[currentQuestion][1])){
+                            System.out.println("Resposta Correta");
+                        }
+
+                    }else if (selectedRadio.equals("option2")){
+                        if (option2.isSelected() && option2.getText().equals(questions[currentQuestion][1])){
+                            System.out.println("Resposta Correta");
+                        }
+
+                    }else if (selectedRadio.equals("option3")){
+                        if (option3.isSelected() && option3.getText().equals(questions[currentQuestion][1])){
+                            System.out.println("Resposta Correta");
+                        }
+
+                    }else if (selectedRadio.equals("option4")){
+                        if (option4.isSelected() && option4.getText().equals(questions[currentQuestion][1])){
+                            System.out.println("Resposta Correta");
+                        }
+
+                    }
+                    //muda para a proxima pergunta
                     if (currentQuestion < questions.length-1 ) {
                         currentQuestion += 1;
                         changeQuestion();
-
-                        //changeScore();
 
                         //desmarca a opcao selecionada
                         group.getSelectedToggle().setSelected(false);
@@ -137,28 +154,7 @@ public class ControllerQuiz implements Initializable{
                         }
                     }
                 } else {
-                    //abrir janela avisando que nenhuma resposta foi escolhida
-                    final Stage dialog = new Stage();
-                    //faz a janela nova bloquear a anterior
-                    dialog.initModality(Modality.WINDOW_MODAL);
-                    dialog.initOwner(((Node) (actionEvent.getSource())).getScene().getWindow());
-
-                    dialog.initStyle(StageStyle.UTILITY);
-                    dialog.setTitle("Aviso");
-                    Text text = new Text(30, 30, "Uma opcao deve estar selecionada");
-                    Button button = new Button("OK");
-                    button.setLayoutY(65);
-                    button.setLayoutX(130);
-                    //seta botao para fechar a janela
-                    button.setOnAction(new EventHandler<ActionEvent>() {
-                        @Override
-                        public void handle(ActionEvent actionEvent) {
-                            dialog.close();
-                        }
-                    });
-
-                    dialog.setScene(new Scene(new Group(text, button), 290, 110));
-                    dialog.show();
+                    ControllerNome.warningMessage(actionEvent, "Uma opção deve estar selecionada");
                 }
             }
         });
