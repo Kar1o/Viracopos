@@ -37,6 +37,8 @@ public class ControllerNome implements Initializable{
     @FXML
     private Button btnStart;
 
+    private int totalPlayer = Integer.parseInt(ControllerJogador.parameters);
+
     public static List<String> parameters = new ArrayList<String>();
 
 
@@ -44,12 +46,13 @@ public class ControllerNome implements Initializable{
     public void initialize(URL url, final ResourceBundle resourceBundle) {
 
         //elimina jogadores nao existentes e ajusta posicao dos existentes
-        if (ControllerJogador.parameters.equals("2")) {
+        if (totalPlayer == 2) {
             lblPlayer3.setVisible(false);
             player3.setVisible(false);
             lblPlayer4.setVisible(false);
             player4.setVisible(false);
-        } else if (ControllerJogador.parameters.equals("3")) {
+        }
+        else if (totalPlayer == 3) {
             lblPlayer4.setVisible(false);
             player4.setVisible(false);
         }
@@ -61,26 +64,26 @@ public class ControllerNome implements Initializable{
                 String message = "Insira nome em todos os campos!";
 
                 if ((player1.getText().equals("") || player2.getText().equals(""))
-                        && ControllerJogador.parameters.equals("2")) {
-                    warningMessage(actionEvent, message);
-                } else if ((player1.getText().equals("") || player2.getText().equals("") || player3.getText().equals(""))
-                        && ControllerJogador.parameters.equals("3")) {
-                    warningMessage(actionEvent, message);
-                } else if ((player1.getText().equals("") || player2.getText().equals("") || player3.getText().equals("")
-                        || player4.getText().equals("")) && ControllerJogador.parameters.equals("4")) {
-                    warningMessage(actionEvent, message);
-                } else {
-
-
+                        && totalPlayer == 2) {
+                    warningMessage(message);
+                }
+                else if ((player1.getText().equals("") || player2.getText().equals("") || player3.getText().equals(""))
+                        && totalPlayer == 3) {
+                    warningMessage(message);
+                }
+                else if ((player1.getText().equals("") || player2.getText().equals("") || player3.getText().equals("")
+                        || player4.getText().equals("")) && totalPlayer == 4) {
+                    warningMessage(message);
+                }
+                else {
                     //popular array com valores de nomes
                     parameters.add(player1.getText());
                     parameters.add(player2.getText());
                     parameters.add(player3.getText());
                     parameters.add(player4.getText());
 
-                    Parent root;
                     try {
-                        root = FXMLLoader.load(getClass().getClassLoader().getResource("sample/quiz.fxml"), resourceBundle);
+                        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("sample/quiz.fxml"), resourceBundle);
                         Stage stage = new Stage();
                         stage.setTitle("Viracopos");
                         stage.setScene(new Scene(root, 800, 600));
@@ -100,19 +103,24 @@ public class ControllerNome implements Initializable{
 
     }
 
-    public static void warningMessage(ActionEvent actionEvent, String message){
-        //abrir janela avisando que nenhuma resposta foi escolhida
+    /**
+     * abrir janela avisando que nenhuma resposta foi escolhida
+     * @param message texto de aviso para a janela
+     */
+    public static void warningMessage(String message){
         final Stage dialog = new Stage();
-        //faz a janela nova bloquear a anterior
-        dialog.initModality(Modality.WINDOW_MODAL);
-        dialog.initOwner(((Node) (actionEvent.getSource())).getScene().getWindow());
 
+        //faz a janela nova bloquear a anterior
+        dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.initStyle(StageStyle.UTILITY);
         dialog.setTitle("Aviso");
+
+        //cria elementos da janela
         Text text = new Text(30, 30, message);
         Button button = new Button("OK");
         button.setLayoutY(65);
         button.setLayoutX(130);
+
         //seta botao para fechar a janela
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -122,6 +130,7 @@ public class ControllerNome implements Initializable{
         });
 
         dialog.setScene(new Scene(new Group(text, button), 290, 110));
+        dialog.setResizable(false);
         dialog.show();
     }
 }

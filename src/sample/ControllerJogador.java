@@ -29,7 +29,6 @@ public class ControllerJogador implements Initializable{
     public static String parameters;
 
 
-
     @Override
     public void initialize(URL url, final ResourceBundle resourceBundle) {
 
@@ -46,9 +45,8 @@ public class ControllerJogador implements Initializable{
             public void handle(ActionEvent actionEvent) {
                 parameters = choicePlayer.getValue().toString();
 
-                Parent root;
                 try {
-                    root = FXMLLoader.load(getClass().getClassLoader().getResource("sample/nome_jogador.fxml"), resourceBundle);
+                    Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("sample/nome_jogador.fxml"), resourceBundle);
                     Stage stage = new Stage();
                     stage.setTitle("Viracopos");
                     stage.setScene(new Scene(root, 600, 450));

@@ -13,7 +13,7 @@
       <Label fx:id="name2" layoutX="265.0" layoutY="45.0" text="Label" />
       <Label fx:id="name3" layoutX="450.0" layoutY="45.0" text="Label" />
       <Label fx:id="name4" layoutX="650.0" layoutY="45.0" text="Label" />
-      <ImageView fx:id="pictureQuestion" fitHeight="150.0" fitWidth="170.0" layoutX="50.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="pictureRound" fitHeight="150.0" fitWidth="170.0" layoutX="50.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true" />
       <RadioButton fx:id="option1" layoutX="50.0" layoutY="480.0" mnemonicParsing="false" text="A" />
       <RadioButton fx:id="option2" layoutX="50.0" layoutY="540.0" mnemonicParsing="false" text="C" />
       <RadioButton fx:id="option3" layoutX="300.0" layoutY="480.0" mnemonicParsing="false" text="B" />
