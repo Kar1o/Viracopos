@@ -1,0 +1,126 @@
+@startuml
+
+package Controller{
+class ControllerJogador{
+- btnContinue:Button
+- choicePlayer:ChoiceBox
++ {static}parameters:String
++ initialize():void
+}
+class ControllerNome{
+- player1:TextArea
+- player2:TextArea
+- player3:TextArea
+- player4:TextArea
+- lblPlayer3:Label
+- lblPlayer4:Label
+- btnStart:Button
+- totalPlayer:int
++ {static}parameters:List<String>
+
++initialize():void
++{static}warnigMessage():void
+}
+
+class ControllerQuiz{
+-question:TextArea
+-confirm:Button
+-option1:RadioButton
+-option2:RadioButton
+-option3:RadioButton
+-option4:RadioButton
+-name1:Label
+-name2:Label
+-name3:Label
+-name4:Label
+-score1:Label
+-score2:Label
+-score3:Label
+-score4:Label
+-pictureRound:ImageView
+-GROUP:ToggleGroup
+-answers:List<String>
+-questions[][][]:String
+-scoreValue1:int
+-scoreValue2:int
+-scoreValue3:int
+-scoreValue4:int
+-currentQuestion:int
+-currentPlayer:int
+-currentRound:int
+-TOTALROUND:int
+-TOTOALPLAYER:int
++initialize(URL, ResourceBundle):void
+-buttonAction(ActionEvent):void
+-checkanswer():void
+-assignScoreValue():void
+-changeQuestion():void
+-changeScore():void
+}
+
+
+class Main{
++start():void
++{static}main(String[]):void
+}
+}
+
+package Model{
+class ConnectData{
+-DRIVER:String
+-DB:String
+-URL:String
+-USER:String
+-PASSWD:String
+
++open():boolean
++close():boolean
++selectQuestion():void
++selectPlayers():void
+}
+
+class Player{
++nome:String
++pontos:int
+
++getNomes(String):String
++setNome():void
++getPontos(int):int
++setPontos():void
+
+}
+
+class Round{
+-round:int
+-question:String
+-answer1:String
+-answer2:String
+-answer3:String
+-answer4:String
+
++getRound(int):int
++setRound():void
++getQuestion(String):String
++setQuestion():void
++getAnswer1(String):String
++setAnswer1():void
++getAnswer2(String):String
++setAnswer2():void
++getAnswer3(String):String
++setAnswer3():void
++getAnswer4(String):String
++setAnswer4():void
+}
+}
+
+class ControllerQuiz ..> class ConnectData
+class ControllerQuiz ..> class Round
+class ControllerNome ..> class Player
+
+
+
+class Main "1..1"->"1..1"  ControllerJogador : creates
+class ControllerJogador "1..1"->"1..1" class ControllerNome : creates
+class ControllerNome "1..1"->"1..1" class ControllerQuiz : creates
+
+@enduml

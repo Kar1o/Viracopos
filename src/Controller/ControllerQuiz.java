@@ -1,5 +1,6 @@
-package sample;
+package Controller;
 
+import Model.ConnectData;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -36,7 +37,7 @@ public class ControllerQuiz implements Initializable{
     @FXML
     private ImageView pictureRound;
 
-    private final ToggleGroup group = new ToggleGroup();
+    private final ToggleGroup GROUP = new ToggleGroup();
 
     private List<String> answers = new ArrayList<String>();
 
@@ -63,6 +64,9 @@ public class ControllerQuiz implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        ConnectData connectData = new ConnectData();
+        connectData.open();
 
         //elimina labels nao existentes e ajusta posicao dos existentes
         if (totalPlayer == 2){
@@ -93,10 +97,10 @@ public class ControllerQuiz implements Initializable{
         name4.setText(ControllerNome.parameters.get(3));
 
         //seta os 4 RadioButton para o mesmo grupo
-        option1.setToggleGroup(group);
-        option2.setToggleGroup(group);
-        option3.setToggleGroup(group);
-        option4.setToggleGroup(group);
+        option1.setToggleGroup(GROUP);
+        option2.setToggleGroup(GROUP);
+        option3.setToggleGroup(GROUP);
+        option4.setToggleGroup(GROUP);
 
 
 
@@ -132,7 +136,7 @@ public class ControllerQuiz implements Initializable{
                 changeQuestion();
 
                 //desmarca a opcao selecionada
-                group.getSelectedToggle().setSelected(false);
+                GROUP.getSelectedToggle().setSelected(false);
             }
             else if(currentPlayer == totalPlayer && currentRound + 1 < totalRound){
                 currentRound += 1;
@@ -142,13 +146,13 @@ public class ControllerQuiz implements Initializable{
                 changeQuestion();
 
                 //desmarca a opcao selecionada
-                group.getSelectedToggle().setSelected(false);
+                GROUP.getSelectedToggle().setSelected(false);
             }
             else {
                 ControllerNome.warningMessage("Fim da partida");
 
                 try {
-                    Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("sample/report.fxml"));
+                    Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("View/report.fxml"));
                     Stage report = new Stage();
                     report.setTitle("Resultados");
                     report.setScene(new Scene(root, 800, 600));
@@ -172,7 +176,7 @@ public class ControllerQuiz implements Initializable{
      */
     private void checkAnswer(){
         //recebe o nome do RadioButton selecionado
-        String selectedRadio = group.getSelectedToggle().toString().substring(15, 22);
+        String selectedRadio = GROUP.getSelectedToggle().toString().substring(15, 22);
 
         if (selectedRadio.equals("option1")) {
             if (option1.getText().equals(questions[currentRound][currentQuestion][1])){

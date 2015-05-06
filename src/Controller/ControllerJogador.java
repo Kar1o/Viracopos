@@ -1,4 +1,4 @@
-package sample;
+package Controller;
 
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -46,7 +46,7 @@ public class ControllerJogador implements Initializable{
                 parameters = choicePlayer.getValue().toString();
 
                 try {
-                    Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("sample/nome_jogador.fxml"), resourceBundle);
+                    Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("View/nome_jogador.fxml"), resourceBundle);
                     Stage stage = new Stage();
                     stage.setTitle("Viracopos");
                     stage.setScene(new Scene(root, 600, 450));

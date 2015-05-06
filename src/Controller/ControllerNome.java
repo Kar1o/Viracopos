@@ -1,4 +1,4 @@
-package sample;
+package Controller;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -83,7 +83,7 @@ public class ControllerNome implements Initializable{
                     parameters.add(player4.getText());
 
                     try {
-                        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("sample/quiz.fxml"), resourceBundle);
+                        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("View/quiz.fxml"), resourceBundle);
                         Stage stage = new Stage();
                         stage.setTitle("Viracopos");
                         stage.setScene(new Scene(root, 800, 600));
