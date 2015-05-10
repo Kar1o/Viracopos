@@ -18,6 +18,8 @@ public class ConnectData {
     private final String URL = "jdbc:mariadb://23.239.18.68:3306/";
     private final String USER = "admin";
     private final String PASSWD = "m1IgIOUY4ekY";
+    private final String QUERY_ALUNO = "select ra, nome from " + DB + ".aluno";
+    private final String QUERY_PERGUNTAS = "select pergunta_id, pergunta, resposta, round from " + DB + ".perguntas";
 
     public boolean open(){
         try {
@@ -44,19 +46,41 @@ public class ConnectData {
         }
     }
 
-    public void selectQuestions(){
+    public void selectQuestions() throws SQLException {
         try {
             statement = connection.createStatement();
+            resultSet = statement.executeQuery(QUERY_PERGUNTAS);
+            while (resultSet.next()){
+                int pergunta_id = resultSet.getInt("pergunta_id");
+                String pergunta = resultSet.getString("pergunta");
+                String resposta = resultSet.getString("resposta");
+                int categoria = resultSet.getInt("round");
+                System.out.println("id:" + pergunta_id + " pergunta:" + pergunta + " resposta:" + resposta +
+                        " round:" +categoria);
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        finally {
+            if (statement != null){ statement.close(); }
+        }
     }
 
-    public void selectPlayers(){
+    public void selectPlayers() throws SQLException {
         try {
-            statement=connection.createStatement();
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(QUERY_ALUNO);
+            while (resultSet.next()){
+                int ra = resultSet.getInt("ra");
+                String nome = resultSet.getString("nome");
+                System.out.println("ra:" + ra + " nome:" + nome);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+        finally {
+            if (statement != null){ statement.close(); }
         }
 
     }

@@ -1,6 +1,8 @@
 package Controller;
 
 import Model.ConnectData;
+import Model.Player;
+import Model.Round;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -15,6 +17,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.*;
 
 public class ControllerQuiz implements Initializable{
@@ -37,7 +40,7 @@ public class ControllerQuiz implements Initializable{
     @FXML
     private ImageView pictureRound;
 
-    private final ToggleGroup GROUP = new ToggleGroup();
+    private final ToggleGroup group = new ToggleGroup();
 
     private List<String> answers = new ArrayList<String>();
 
@@ -56,17 +59,29 @@ public class ControllerQuiz implements Initializable{
             }
     };
 
-    private int scoreValue1 = 0, scoreValue2 = 0, scoreValue3 = 0, scoreValue4 = 0;
-
     private int currentQuestion = 1, currentRound = 0, currentPlayer = 1;
 
     private final int totalRound = questions.length, totalPlayer = Integer.parseInt(ControllerJogador.parameters);
+
+    Player jogador1 = new Player(ControllerNome.parameters.get(0));
+    Player jogador2 = new Player(ControllerNome.parameters.get(1));
+    Player jogador3 = new Player(ControllerNome.parameters.get(2));
+    Player jogador4 = new Player(ControllerNome.parameters.get(3));
+
+    Round round1 = new Round(1);
+    Round round2 = new Round(2);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         ConnectData connectData = new ConnectData();
         connectData.open();
+        try {
+            connectData.selectPlayers();
+            connectData.selectQuestions();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         //elimina labels nao existentes e ajusta posicao dos existentes
         if (totalPlayer == 2){
@@ -78,6 +93,8 @@ public class ControllerQuiz implements Initializable{
             name2.setLayoutX(520);
             score1.setLayoutX(220);
             score2.setLayoutX(520);
+            name1.setText(jogador1.getNome());
+            name2.setText(jogador2.getNome());
         }
         else if (totalPlayer == 3){
             name4.setVisible(false);
@@ -88,20 +105,22 @@ public class ControllerQuiz implements Initializable{
             score1.setLayoutX(200);
             score2.setLayoutX(400);
             score3.setLayoutX(600);
+            name1.setText(jogador1.getNome());
+            name2.setText(jogador2.getNome());
+            name3.setText(jogador3.getNome());
+        }
+        else {
+            name1.setText(jogador1.getNome());
+            name2.setText(jogador2.getNome());
+            name3.setText(jogador3.getNome());
+            name4.setText(jogador4.getNome());
         }
 
-        //seta o nome dos jogadores
-        name1.setText(ControllerNome.parameters.get(0));
-        name2.setText(ControllerNome.parameters.get(1));
-        name3.setText(ControllerNome.parameters.get(2));
-        name4.setText(ControllerNome.parameters.get(3));
-
         //seta os 4 RadioButton para o mesmo grupo
-        option1.setToggleGroup(GROUP);
-        option2.setToggleGroup(GROUP);
-        option3.setToggleGroup(GROUP);
-        option4.setToggleGroup(GROUP);
-
+        option1.setToggleGroup(group);
+        option2.setToggleGroup(group);
+        option3.setToggleGroup(group);
+        option4.setToggleGroup(group);
 
 
         changeScore();
@@ -136,7 +155,7 @@ public class ControllerQuiz implements Initializable{
                 changeQuestion();
 
                 //desmarca a opcao selecionada
-                GROUP.getSelectedToggle().setSelected(false);
+                group.getSelectedToggle().setSelected(false);
             }
             else if(currentPlayer == totalPlayer && currentRound + 1 < totalRound){
                 currentRound += 1;
@@ -146,11 +165,16 @@ public class ControllerQuiz implements Initializable{
                 changeQuestion();
 
                 //desmarca a opcao selecionada
-                GROUP.getSelectedToggle().setSelected(false);
+                group.getSelectedToggle().setSelected(false);
             }
             else {
-                ControllerNome.warningMessage("Fim da partida");
 
+                ControllerNome.warningMessage("Fim da partida");
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 try {
                     Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("View/report.fxml"));
                     Stage report = new Stage();
@@ -176,7 +200,7 @@ public class ControllerQuiz implements Initializable{
      */
     private void checkAnswer(){
         //recebe o nome do RadioButton selecionado
-        String selectedRadio = GROUP.getSelectedToggle().toString().substring(15, 22);
+        String selectedRadio = group.getSelectedToggle().toString().substring(15, 22);
 
         if (selectedRadio.equals("option1")) {
             if (option1.getText().equals(questions[currentRound][currentQuestion][1])){
@@ -206,16 +230,16 @@ public class ControllerQuiz implements Initializable{
      */
     private void assignScoreValue(){
         if (currentPlayer == 1){
-            scoreValue1 += 1;
+            jogador1.setPontos(1);
         }
         else if (currentPlayer == 2){
-            scoreValue2 += 1;
+            jogador2.setPontos(1);
         }
         else if (currentPlayer == 3){
-            scoreValue3 += 1;
+            jogador3.setPontos(1);
         }
         else if (currentPlayer == 4){
-            scoreValue4 += 1;
+            jogador4.setPontos(1);
         }
     }
 
@@ -242,9 +266,9 @@ public class ControllerQuiz implements Initializable{
      * atualiza o placar de todos os jogadores
      */
     private void changeScore(){
-        score1.setText(String.valueOf(scoreValue1));
-        score2.setText(String.valueOf(scoreValue2));
-        score3.setText(String.valueOf(scoreValue3));
-        score4.setText(String.valueOf(scoreValue4));
+        score1.setText(String.valueOf(jogador1.getPontos()));
+        score2.setText(String.valueOf(jogador2.getPontos()));
+        score3.setText(String.valueOf(jogador3.getPontos()));
+        score4.setText(String.valueOf(jogador4.getPontos()));
     }
 }

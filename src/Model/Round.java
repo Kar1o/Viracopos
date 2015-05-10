@@ -5,19 +5,20 @@ package Model;
  */
 public class Round {
     private int round;
-    private String question;
-    private String answer1;
-    private String answer2;
-    private String answer3;
-    private String answer4;
 
-    public Round(int round, String question, String answer1, String answer2, String answer3, String answer4) {
+    private String question1;
+    private String question2;
+    private String question3;
+    private String question4;
+
+    private String answers1[];
+    private String answers2[];
+    private String answers3[];
+    private String answers4[];
+
+
+    public Round(int round) {
         this.round = round;
-        this.question = question;
-        this.answer1 = answer1;
-        this.answer2 = answer2;
-        this.answer3 = answer3;
-        this.answer4 = answer4;
     }
 
     public int getRound() {
@@ -28,43 +29,67 @@ public class Round {
         this.round = round;
     }
 
-    public String getAnswer1() {
-        return answer1;
+    public String getQuestion1() {
+        return question1;
     }
 
-    public void setAnswer1(String answer1) {
-        this.answer1 = answer1;
+    public void setQuestion1(String question1) {
+        this.question1 = question1;
     }
 
-    public String getAnswer2() {
-        return answer2;
+    public String getQuestion2() {
+        return question2;
     }
 
-    public void setAnswer2(String answer2) {
-        this.answer2 = answer2;
+    public void setQuestion2(String question2) {
+        this.question2 = question2;
     }
 
-    public String getAnswer3() {
-        return answer3;
+    public String getQuestion3() {
+        return question3;
     }
 
-    public void setAnswer3(String answer3) {
-        this.answer3 = answer3;
+    public void setQuestion3(String question3) {
+        this.question3 = question3;
     }
 
-    public String getAnswer4() {
-        return answer4;
+    public String getQuestion4() {
+        return question4;
     }
 
-    public void setAnswer4(String answer4) {
-        this.answer4 = answer4;
+    public void setQuestion4(String question4) {
+        this.question4 = question4;
     }
 
-    public String getQuestion() {
-        return question;
+    public String[] getAnswers1() {
+        return answers1;
     }
 
-    public void setQuestion(String question) {
-        this.question = question;
+    public void setAnswers1(String[] answers1) {
+        this.answers1 = answers1;
+    }
+
+    public String[] getAnswers2() {
+        return answers2;
+    }
+
+    public void setAnswers2(String[] answers2) {
+        this.answers2 = answers2;
+    }
+
+    public String[] getAnswers3() {
+        return answers3;
+    }
+
+    public void setAnswers3(String[] answers3) {
+        this.answers3 = answers3;
+    }
+
+    public String[] getAnswers4() {
+        return answers4;
+    }
+
+    public void setAnswers4(String[] answers4) {
+        this.answers4 = answers4;
     }
 }

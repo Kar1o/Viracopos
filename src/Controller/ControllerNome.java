@@ -60,47 +60,52 @@ public class ControllerNome implements Initializable{
         btnStart.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-
-                String message = "Insira nome em todos os campos!";
-
-                if ((player1.getText().equals("") || player2.getText().equals(""))
-                        && totalPlayer == 2) {
-                    warningMessage(message);
-                }
-                else if ((player1.getText().equals("") || player2.getText().equals("") || player3.getText().equals(""))
-                        && totalPlayer == 3) {
-                    warningMessage(message);
-                }
-                else if ((player1.getText().equals("") || player2.getText().equals("") || player3.getText().equals("")
-                        || player4.getText().equals("")) && totalPlayer == 4) {
-                    warningMessage(message);
-                }
-                else {
-                    //popular array com valores de nomes
-                    parameters.add(player1.getText());
-                    parameters.add(player2.getText());
-                    parameters.add(player3.getText());
-                    parameters.add(player4.getText());
-
-                    try {
-                        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("View/quiz.fxml"), resourceBundle);
-                        Stage stage = new Stage();
-                        stage.setTitle("Viracopos");
-                        stage.setScene(new Scene(root, 800, 600));
-                        stage.setResizable(false);
-                        stage.show();
-
-                        //esconder janela atual
-                        ((Node) (actionEvent.getSource())).getScene().getWindow().hide();
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-                }
+                buttonAction(actionEvent);
             }
         });
 
+    }
+
+    /**
+     * acao para botao de confirmar nomes
+     * @param actionEvent utilizado para identificar janela atual
+     */
+    public void buttonAction(ActionEvent actionEvent){
+        if ((player1.getText().equals("") || player2.getText().equals(""))
+                && totalPlayer == 2) {
+            warningMessage("Insira nome em todos os campos!");
+        }
+        else if ((player1.getText().equals("") || player2.getText().equals("") || player3.getText().equals(""))
+                && totalPlayer == 3) {
+            warningMessage("Insira nome em todos os campos!");
+        }
+        else if ((player1.getText().equals("") || player2.getText().equals("") || player3.getText().equals("")
+                || player4.getText().equals("")) && totalPlayer == 4) {
+            warningMessage("Insira nome em todos os campos!");
+        }
+        else {
+            //popular array com valores de nomes
+            parameters.add(player1.getText());
+            parameters.add(player2.getText());
+            parameters.add(player3.getText());
+            parameters.add(player4.getText());
+
+            try {
+                Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("View/quiz.fxml"));
+                Stage stage = new Stage();
+                stage.setTitle("Viracopos");
+                stage.setScene(new Scene(root, 800, 600));
+                stage.setResizable(false);
+                stage.show();
+
+                //esconder janela atual
+                ((Node) (actionEvent.getSource())).getScene().getWindow().hide();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
     }
 
     /**

@@ -37,30 +37,35 @@ public class ControllerJogador implements Initializable{
                 "2", "3", "4"
         ));
 
+        //definir valor default
         choicePlayer.getSelectionModel().selectFirst();
         choicePlayer.setTooltip(new Tooltip(choicePlayer.getValue().toString() + "jogadores"));
 
         btnContinue.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                parameters = choicePlayer.getValue().toString();
-
-                try {
-                    Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("View/nome_jogador.fxml"), resourceBundle);
-                    Stage stage = new Stage();
-                    stage.setTitle("Viracopos");
-                    stage.setScene(new Scene(root, 600, 450));
-                    stage.setResizable(false);
-                    stage.show();
-
-                    //esconder janela atual
-                    ((Node)(actionEvent.getSource())).getScene().getWindow().hide();
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                buttonAction(actionEvent);
             }
         });
 
+    }
+
+    public void buttonAction(ActionEvent actionEvent){
+        parameters = choicePlayer.getValue().toString();
+
+        try {
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("View/nome_jogador.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("Viracopos");
+            stage.setScene(new Scene(root, 600, 450));
+            stage.setResizable(false);
+            stage.show();
+
+            //esconder janela atual
+            ((Node)(actionEvent.getSource())).getScene().getWindow().hide();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
