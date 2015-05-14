@@ -44,44 +44,25 @@ public class ControllerQuiz implements Initializable{
 
     private List<String> answers = new ArrayList<String>();
 
-    private String[][][] questions = {
-            {{"Round1"},
-                    {"Pergunta1", "Resposta1-1", "Resposta1-2", "Resposta1-3", "Resposta1-4"},
-                    {"Pergunta2", "Resposta2-1", "Resposta2-2", "Resposta2-3", "Resposta2-4"},
-                    {"Pergunta3", "Resposta3-1", "Resposta3-2", "Resposta3-3", "Resposta3-4"},
-                    {"Pergunta4", "Resposta4-1", "Resposta4-2", "Resposta4-3", "Resposta4-4"}
-            },
-            {{"Round2"},
-                    {"Pergunta1 round2", "Resposta1-1", "Resposta1-2", "Resposta1-3", "Resposta1-4"},
-                    {"Pergunta2 round2", "Resposta2-1", "Resposta2-2", "Resposta2-3", "Resposta2-4"},
-                    {"Pergunta3 round2", "Resposta3-1", "Resposta3-2", "Resposta3-3", "Resposta3-4"},
-                    {"Pergunta4 round2", "Resposta4-1", "Resposta4-2", "Resposta4-3", "Resposta4-4"}
-            }
-    };
-
-    private int currentQuestion = 1, currentRound = 0, currentPlayer = 1;
-
-    private final int totalRound = questions.length, totalPlayer = Integer.parseInt(ControllerJogador.parameters);
-
     Player jogador1 = new Player(ControllerNome.parameters.get(0));
     Player jogador2 = new Player(ControllerNome.parameters.get(1));
     Player jogador3 = new Player(ControllerNome.parameters.get(2));
     Player jogador4 = new Player(ControllerNome.parameters.get(3));
 
-    Round round1 = new Round(1);
-    Round round2 = new Round(2);
+    ConnectData connectData = new ConnectData();
+
+    Round round = new Round();
+
+    private final int totalPlayer = Integer.parseInt(ControllerJogador.parameters);
+
+    private int currentQuestion = 1, currentRound = 1, currentPlayer = 1;
+
+    private int totalRound = 0;
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        ConnectData connectData = new ConnectData();
-        connectData.open();
-        try {
-            connectData.selectPlayers();
-            connectData.selectQuestions();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
 
         //elimina labels nao existentes e ajusta posicao dos existentes
         if (totalPlayer == 2){
@@ -157,7 +138,7 @@ public class ControllerQuiz implements Initializable{
                 //desmarca a opcao selecionada
                 group.getSelectedToggle().setSelected(false);
             }
-            else if(currentPlayer == totalPlayer && currentRound + 1 < totalRound){
+            else if(currentPlayer == totalPlayer && currentRound < totalRound){
                 currentRound += 1;
                 currentPlayer = 1;
                 currentQuestion = 1;
@@ -169,22 +150,25 @@ public class ControllerQuiz implements Initializable{
             }
             else {
 
-                ControllerNome.warningMessage("Fim da partida");
-                try {
-                    Thread.sleep(5000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                insertJogadorData();
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Fim!");
+                alert.setHeaderText("Obrigado por jogar");
+                alert.setContentText("Aperte OK para ver lista de ranking");
+                alert.showAndWait();
+
                 try {
                     Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("View/report.fxml"));
                     Stage report = new Stage();
                     report.setTitle("Resultados");
-                    report.setScene(new Scene(root, 800, 600));
+                    Scene scene = new Scene(root, 800, 600);
+                    scene.getStylesheets().add("View/style.css");
+                    report.setScene(scene);
                     report.setResizable(false);
                     report.show();
 
                     //esconder janela atual
-                    ((Node)(actionEvent.getSource())).getScene().getWindow().hide();
+                    ((Node) (actionEvent.getSource())).getScene().getWindow().hide();
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -196,6 +180,52 @@ public class ControllerQuiz implements Initializable{
     }
 
     /**
+     * insere no banco o nome e nota dos jogadores
+     */
+    private void insertJogadorData(){
+        if (totalPlayer == 2) {
+            try {
+                connectData.open();
+                connectData.insertPlayers(jogador1.getNome(), jogador1.getPontos());
+                connectData.insertPlayers(jogador2.getNome(), jogador2.getPontos());
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                connectData.close();
+            }
+        }
+
+        else if (totalPlayer == 3) {
+            try {
+                connectData.open();
+                connectData.insertPlayers(jogador1.getNome(), jogador1.getPontos());
+                connectData.insertPlayers(jogador2.getNome(), jogador2.getPontos());
+                connectData.insertPlayers(jogador3.getNome(), jogador3.getPontos());
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                connectData.close();
+            }
+        }
+        else{
+            try {
+                connectData.open();
+                connectData.insertPlayers(jogador1.getNome(), jogador1.getPontos());
+                connectData.insertPlayers(jogador2.getNome(), jogador2.getPontos());
+                connectData.insertPlayers(jogador3.getNome(), jogador3.getPontos());
+                connectData.insertPlayers(jogador4.getNome(), jogador4.getPontos());
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                connectData.close();
+            }
+
+
+        }
+    }
+
+    /**
      * verifica se resposta selecionada eh a correta
      */
     private void checkAnswer(){
@@ -203,22 +233,22 @@ public class ControllerQuiz implements Initializable{
         String selectedRadio = group.getSelectedToggle().toString().substring(15, 22);
 
         if (selectedRadio.equals("option1")) {
-            if (option1.getText().equals(questions[currentRound][currentQuestion][1])){
+            if (option1.getText().equals(round.getAnswer1())){
                 assignScoreValue();
             }
 
         }else if (selectedRadio.equals("option2")){
-            if (option2.getText().equals(questions[currentRound][currentQuestion][1])){
+            if (option2.getText().equals(round.getAnswer1())){
                 assignScoreValue();
             }
 
         }else if (selectedRadio.equals("option3")){
-            if (option3.getText().equals(questions[currentRound][currentQuestion][1])){
+            if (option3.getText().equals(round.getAnswer1())){
                 assignScoreValue();
             }
 
         }else if (selectedRadio.equals("option4")){
-            if (option4.getText().equals(questions[currentRound][currentQuestion][1])){
+            if (option4.getText().equals(round.getAnswer1())){
                 assignScoreValue();
             }
 
@@ -246,16 +276,30 @@ public class ControllerQuiz implements Initializable{
     /**
      * joga pergunta e cada resposta em um RadioButton
      */
-    private void changeQuestion(){
-        //seta texto da pergunta
-        question.setText(questions[currentRound][currentQuestion][0]);
-        answers.clear();
-        for (int i = 1; i <= 4 ; i++) {
-            answers.add(questions[currentRound][currentQuestion][i]);
+    private void changeQuestion() {
+        try {
+            connectData.open();
+            if (totalRound == 0){
+                totalRound = connectData.selectTotalRound();
+            }
+            round = connectData.selectQuestions(currentRound, currentQuestion);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            connectData.close();
         }
+
+        //seta texto da pergunta
+        question.setText(round.getQuestion());
+
         //embaralha a ordem das respostas
+        answers.clear();
+        answers.add(round.getAnswer1());
+        answers.add(round.getAnswer2());
+        answers.add(round.getAnswer3());
+        answers.add(round.getAnswer4());
         Collections.shuffle(answers);
-        //seta texto das respostas
+
         option1.setText(answers.get(0));
         option2.setText(answers.get(1));
         option3.setText(answers.get(2));

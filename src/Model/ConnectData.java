@@ -6,8 +6,8 @@ import java.sql.*;
  * Created by k on 5/3/15.
  */
 public class ConnectData {
-    public Connection connection;
 
+    public Connection connection;
     //insert
     public Statement statement;
     //query
@@ -18,8 +18,72 @@ public class ConnectData {
     private final String URL = "jdbc:mariadb://23.239.18.68:3306/";
     private final String USER = "admin";
     private final String PASSWD = "m1IgIOUY4ekY";
-    private final String QUERY_ALUNO = "select ra, nome from " + DB + ".aluno";
-    private final String QUERY_PERGUNTAS = "select pergunta_id, pergunta, resposta, round from " + DB + ".perguntas";
+    private final String QUERY_JOGADOR = "select jogador_id, nome, score from " + DB + ".jogador";
+
+
+    public Round selectQuestions(int round, int index) throws SQLException {
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery("select pergunta, resposta1, resposta2, resposta3, resposta4 from "
+                    + DB + ".respostas, " + DB + ".perguntas, " + DB + ".round " +
+                    "where perguntas.pergunta_id = respostas.pergunta_id && perguntas.round_id = round.round_id " +
+                     "&& round.round_id = " + round + " && perguntas.indice = " + index);
+
+        resultSet.next();
+
+        Round roundNew = new Round();
+        roundNew.setQuestion(resultSet.getString("pergunta"));
+        roundNew.setAnswer1(resultSet.getString("resposta1"));
+        roundNew.setAnswer2(resultSet.getString("resposta2"));
+        roundNew.setAnswer3(resultSet.getString("resposta3"));
+        roundNew.setAnswer4(resultSet.getString("resposta4"));
+
+        return roundNew;
+    }
+
+    public int selectTotalRound() throws SQLException {
+        statement = connection.createStatement();
+        resultSet = statement.executeQuery("select max(round_id) from Viracopos.round");
+
+        resultSet.next();
+        int max = resultSet.getInt("max(round_id)");
+        System.out.println(max);
+        return max;
+    }
+
+
+    public Player selectPlayers() throws SQLException {
+        try {
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(QUERY_JOGADOR);
+            while (resultSet.next()){
+                int jogador_id = resultSet.getInt("jogador_id");
+                String nome = resultSet.getString("nome");
+                int score = resultSet.getInt("score");
+                //System.out.println("id:" + jogador_id + " nome:" + nome + " score:" + score);
+
+                Player player = new Player();
+                player.setId(jogador_id);
+                player.setNome(nome);
+                player.setPontos(score);
+                return player;
+            }
+        }
+        finally {
+            if (statement != null){ statement.close(); }
+        }
+        return null;
+    }
+
+    public void insertPlayers(String name, int score) throws SQLException {
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate(
+                    "insert into " + DB + ".jogador (nome, score) values(\"" + name + "\"," + score + ")"
+            );
+        } finally {
+            if (statement != null) { statement.close(); }
+        }
+    }
 
     public boolean open(){
         try {
@@ -46,43 +110,5 @@ public class ConnectData {
         }
     }
 
-    public void selectQuestions() throws SQLException {
-        try {
-            statement = connection.createStatement();
-            resultSet = statement.executeQuery(QUERY_PERGUNTAS);
-            while (resultSet.next()){
-                int pergunta_id = resultSet.getInt("pergunta_id");
-                String pergunta = resultSet.getString("pergunta");
-                String resposta = resultSet.getString("resposta");
-                int categoria = resultSet.getInt("round");
-                System.out.println("id:" + pergunta_id + " pergunta:" + pergunta + " resposta:" + resposta +
-                        " round:" +categoria);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        finally {
-            if (statement != null){ statement.close(); }
-        }
-    }
-
-    public void selectPlayers() throws SQLException {
-        try {
-            statement = connection.createStatement();
-            resultSet = statement.executeQuery(QUERY_ALUNO);
-            while (resultSet.next()){
-                int ra = resultSet.getInt("ra");
-                String nome = resultSet.getString("nome");
-                System.out.println("ra:" + ra + " nome:" + nome);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        finally {
-            if (statement != null){ statement.close(); }
-        }
-
-    }
 
 }

@@ -115,12 +115,12 @@ class Round{
 
 class ControllerQuiz ..> class ConnectData
 class ControllerQuiz ..> class Round
-class ControllerNome ..> class Player
+class ControllerQuiz ..> class Player
 
 
 
 class Main "1..1"->"1..1"  ControllerJogador : creates
 class ControllerJogador "1..1"->"1..1" class ControllerNome : creates
-class ControllerNome "1..1"->"1..1" class ControllerQuiz : creates
+class ControllerNome "1..1"-->"1..1" class ControllerQuiz : creates
 
 @enduml

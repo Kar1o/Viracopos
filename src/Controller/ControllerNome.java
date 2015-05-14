@@ -94,7 +94,9 @@ public class ControllerNome implements Initializable{
                 Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("View/quiz.fxml"));
                 Stage stage = new Stage();
                 stage.setTitle("Viracopos");
-                stage.setScene(new Scene(root, 800, 600));
+                Scene scene = new Scene(root, 800, 600);
+                scene.getStylesheets().add("View/style.css");
+                stage.setScene(scene);
                 stage.setResizable(false);
                 stage.show();
 
@@ -134,7 +136,10 @@ public class ControllerNome implements Initializable{
             }
         });
 
-        dialog.setScene(new Scene(new Group(text, button), 290, 110));
+        Scene scene = new Scene(new Group(text, button), 290, 110);
+        scene.getStylesheets().add("View/style.css");
+
+        dialog.setScene(scene);
         dialog.setResizable(false);
         dialog.show();
     }

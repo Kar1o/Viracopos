@@ -1,0 +1,74 @@
+create table jogador (
+jogador_id int PRIMARY KEY AUTO_INCREMENT,
+nome varchar(100),
+score int
+)
+
+crete table round (
+round_id int PRIMARY KEY,
+round_nome varchar(100)
+)
+
+create table perguntas (
+pergunta_id int PRIMARY KEY,
+pergunta varchar(250),
+indice int check (indice<=4),
+round_id int references round(round_id)
+)
+
+create table respostas (
+pergunta_id int PRIMARY KEY REFERENCES perguntas(pergunta_id),
+resposta1 varchar(50),
+resposta2 varchar(50),
+resposta3 varchar(50),
+resposta4 varchar(50)
+)
+
+create table aluno_perguntas(
+pergunta_id int references perguntas (pergunta_id),
+aluno_id int references aluno (aluno_id),
+constraint aluno_perguntas_pkey PRIMARY KEY(pergunta_id, aluno_id)
+)
+
+insert into Viracopos.round values(1, "embarque")
+insert into Viracopos.round values(2, "imposto")
+insert into Viracopos.round values(3, "desembarque")
+insert into Viracopos.round values(4, "policia federal")
+
+insert into Viracopos.perguntas values(1,"Pergunta 1-1", 1, 1)
+insert into Viracopos.perguntas values(2,"Pergunta 1-2", 2, 1)
+insert into Viracopos.perguntas values(3,"Pergunta 1-3", 3, 1)
+insert into Viracopos.perguntas values(4,"Pergunta 1-4", 4, 1)
+insert into Viracopos.perguntas values(5,"Pergunta 2-1", 1, 2)
+insert into Viracopos.perguntas values(6,"Pergunta 2-2", 2, 2)
+insert into Viracopos.perguntas values(7,"Pergunta 2-3", 3, 2)
+insert into Viracopos.perguntas values(8,"Pergunta 2-4", 4, 2)
+insert into Viracopos.perguntas values(9,"Pergunta 3-1", 1, 3)
+insert into Viracopos.perguntas values(10,"Pergunta 3-2", 2, 3)
+insert into Viracopos.perguntas values(11,"Pergunta 3-3", 3, 3)
+insert into Viracopos.perguntas values(12,"Pergunta 3-4", 4, 3)
+insert into Viracopos.perguntas values(13,"Pergunta 4-1", 1, 4)
+insert into Viracopos.perguntas values(14,"Pergunta 4-2", 2, 4)
+insert into Viracopos.perguntas values(15,"Pergunta 4-3", 3, 4)
+insert into Viracopos.perguntas values(16,"Pergunta 4-4", 4, 4)
+
+insert into Viracopos.respostas values(1, "Resposta1-1", "Resposta1-2", "Resposta1-3", "Resposta1-4")
+insert into Viracopos.respostas values(2, "Resposta2-1", "Resposta2-2", "Resposta2-3", "Resposta2-4")
+insert into Viracopos.respostas values(3, "Resposta3-1", "Resposta3-2", "Resposta3-3", "Resposta3-4")
+insert into Viracopos.respostas values(4, "Resposta4-1", "Resposta4-2", "Resposta4-3", "Resposta4-4")
+insert into Viracopos.respostas values(5, "Resposta5-1", "Resposta5-2", "Resposta5-3", "Resposta5-4")
+insert into Viracopos.respostas values(6, "Resposta6-1", "Resposta6-2", "Resposta6-3", "Resposta6-4")
+insert into Viracopos.respostas values(7, "Resposta7-1", "Resposta7-2", "Resposta7-3", "Resposta7-4")
+insert into Viracopos.respostas values(8, "Resposta8-1", "Resposta8-2", "Resposta8-3", "Resposta8-4")
+insert into Viracopos.respostas values(9, "Resposta9-1", "Resposta9-2", "Resposta9-3", "Resposta9-4")
+insert into Viracopos.respostas values(10, "Resposta10-1", "Resposta10-2", "Resposta10-3", "Resposta10-4")
+insert into Viracopos.respostas values(11, "Resposta11-1", "Resposta11-2", "Resposta11-3", "Resposta11-4")
+insert into Viracopos.respostas values(12, "Resposta12-1", "Resposta12-2", "Resposta12-3", "Resposta12-4")
+insert into Viracopos.respostas values(13, "Resposta13-1", "Resposta13-2", "Resposta13-3", "Resposta13-4")
+insert into Viracopos.respostas values(14, "Resposta14-1", "Resposta14-2", "Resposta14-3", "Resposta14-4")
+insert into Viracopos.respostas values(15, "Resposta15-1", "Resposta15-2", "Resposta15-3", "Resposta15-4")
+insert into Viracopos.respostas values(16, "Resposta16-1", "Resposta16-2", "Resposta16-3", "Resposta16-4")
+
+select pergunta, resposta1, resposta2, resposta3, resposta4, round_nome from Viracopos.respostas, Viracopos.perguntas, Viracopos.round
+where perguntas.pergunta_id = respostas.pergunta_id && perguntas.round_id = round.round_id
+&& round.round_id = 1 && perguntas.indice = 1
