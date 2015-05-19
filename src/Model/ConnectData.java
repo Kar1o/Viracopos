@@ -18,8 +18,6 @@ public class ConnectData {
     private final String URL = "jdbc:mariadb://23.239.18.68:3306/";
     private final String USER = "admin";
     private final String PASSWD = "m1IgIOUY4ekY";
-    private final String QUERY_JOGADOR = "select jogador_id, nome, score from " + DB + ".jogador";
-
 
     public Round selectQuestions(int round, int index) throws SQLException {
             statement = connection.createStatement();
@@ -40,38 +38,37 @@ public class ConnectData {
         return roundNew;
     }
 
-    public int selectTotalRound() throws SQLException {
-        statement = connection.createStatement();
-        resultSet = statement.executeQuery("select max(round_id) from Viracopos.round");
+    public Player selectPlayers(int player) throws SQLException {
 
+        statement = connection.createStatement();
+        resultSet = statement.executeQuery("select jogador_id, nome, score from " + DB + ".jogador where jogador_id = " + player);
         resultSet.next();
-        int max = resultSet.getInt("max(round_id)");
+
+        Player playerNew = new Player(resultSet.getString("nome"));
+        playerNew.setId(resultSet.getInt("jogador_id"));
+        playerNew.setPontos(resultSet.getInt("score"));
+
+        return playerNew;
+    }
+
+    public int selectTotalPlayer() throws SQLException {
+        statement = connection.createStatement();
+        resultSet = statement.executeQuery("select count(jogador_id) as total from Viracopos.jogador");
+        resultSet.next();
+
+        int max = resultSet.getInt("total");
         System.out.println(max);
         return max;
     }
 
+    public int selectTotalRound() throws SQLException {
+        statement = connection.createStatement();
+        resultSet = statement.executeQuery("select max(round_id) from Viracopos.round");
+        resultSet.next();
 
-    public Player selectPlayers() throws SQLException {
-        try {
-            statement = connection.createStatement();
-            resultSet = statement.executeQuery(QUERY_JOGADOR);
-            while (resultSet.next()){
-                int jogador_id = resultSet.getInt("jogador_id");
-                String nome = resultSet.getString("nome");
-                int score = resultSet.getInt("score");
-                //System.out.println("id:" + jogador_id + " nome:" + nome + " score:" + score);
-
-                Player player = new Player();
-                player.setId(jogador_id);
-                player.setNome(nome);
-                player.setPontos(score);
-                return player;
-            }
-        }
-        finally {
-            if (statement != null){ statement.close(); }
-        }
-        return null;
+        int max = resultSet.getInt("max(round_id)");
+        System.out.println(max);
+        return max;
     }
 
     public void insertPlayers(String name, int score) throws SQLException {

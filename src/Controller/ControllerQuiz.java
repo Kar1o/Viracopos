@@ -44,14 +44,14 @@ public class ControllerQuiz implements Initializable{
 
     private List<String> answers = new ArrayList<String>();
 
-    Player jogador1 = new Player(ControllerNome.parameters.get(0));
-    Player jogador2 = new Player(ControllerNome.parameters.get(1));
-    Player jogador3 = new Player(ControllerNome.parameters.get(2));
-    Player jogador4 = new Player(ControllerNome.parameters.get(3));
+    private Player jogador1 = new Player(ControllerNome.parameters.get(0));
+    private Player jogador2 = new Player(ControllerNome.parameters.get(1));
+    private Player jogador3 = new Player(ControllerNome.parameters.get(2));
+    private Player jogador4 = new Player(ControllerNome.parameters.get(3));
 
-    ConnectData connectData = new ConnectData();
+    private ConnectData connectData = new ConnectData();
 
-    Round round = new Round();
+    private Round round = new Round();
 
     private final int totalPlayer = Integer.parseInt(ControllerJogador.parameters);
 
@@ -149,8 +149,9 @@ public class ControllerQuiz implements Initializable{
                 group.getSelectedToggle().setSelected(false);
             }
             else {
-
+                changeScore();
                 insertJogadorData();
+
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Fim!");
                 alert.setHeaderText("Obrigado por jogar");

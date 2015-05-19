@@ -13,7 +13,8 @@ public class Player {
         this.pontos = 0;
     }
 
-    public Player(){}
+    public Player() {
+    }
 
     public int getId() {
         return id;
