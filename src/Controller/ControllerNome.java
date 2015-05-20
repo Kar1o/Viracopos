@@ -70,7 +70,7 @@ public class ControllerNome implements Initializable{
      * acao para botao de confirmar nomes
      * @param actionEvent utilizado para identificar janela atual
      */
-    public void buttonAction(ActionEvent actionEvent){
+    private void buttonAction(ActionEvent actionEvent){
         if ((player1.getText().equals("") || player2.getText().equals(""))
                 && totalPlayer == 2) {
             warningMessage("Insira nome em todos os campos!");

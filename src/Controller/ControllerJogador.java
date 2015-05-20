@@ -50,7 +50,7 @@ public class ControllerJogador implements Initializable{
 
     }
 
-    public void buttonAction(ActionEvent actionEvent){
+    private void buttonAction(ActionEvent actionEvent){
         parameters = choicePlayer.getValue().toString();
 
         try {

@@ -1,7 +1,6 @@
 package Controller;
 
 import Model.ConnectData;
-import Model.Player;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -20,29 +19,27 @@ public class ControllerReport implements Initializable {
 
 
     @FXML
-    Label title;
+    private Label title;
 
     @FXML
-    ListView<String> listPlayer;
+    private ListView<String> listPlayer;
 
     private ObservableList data = FXCollections.observableArrayList();
 
-    ConnectData connectData = new ConnectData();
+    private ConnectData connectData = new ConnectData();
 
-    Player player = new Player();
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        title.setText("Lista de jogadores");
+    public void initialize(URL url, final ResourceBundle resourceBundle) {
+        title.setText("Lista de Jogadores");
 
         try {
             connectData.open();
             int totalPlayer = connectData.selectTotalPlayer();
             for (int i = 1; i <= totalPlayer; i++) {
 
-                player = connectData.selectPlayers(i);
-                String info = player.getId() + "   -  Nome: " + player.getNome() + "  Pontos: " + player.getPontos();
-                data.add(info);
+                String player = connectData.selectPlayers(i);
+                data.add(player);
 
             }
             listPlayer.setItems(data);
@@ -52,7 +49,5 @@ public class ControllerReport implements Initializable {
         finally {
             connectData.close();
         }
-
-
     }
 }

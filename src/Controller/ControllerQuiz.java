@@ -12,7 +12,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -53,16 +55,18 @@ public class ControllerQuiz implements Initializable{
 
     private Round round = new Round();
 
+    private int currentQuestion = 1, currentRound = 1, currentPlayer = 1, totalRound = 0;
+
     private final int totalPlayer = Integer.parseInt(ControllerJogador.parameters);
 
-    private int currentQuestion = 1, currentRound = 1, currentPlayer = 1;
-
-    private int totalRound = 0;
-
+    private final Image image1 = new Image("View/Images/round-1.jpg");
+    private final Image image2 = new Image("View/Images/round-2.jpg");
+    private final Image image3 = new Image("View/Images/round-3.jpg");
+    private final Image image4 = new Image("View/Images/round-4.jpg");
 
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public void initialize(URL url, final ResourceBundle resourceBundle) {
 
         //elimina labels nao existentes e ajusta posicao dos existentes
         if (totalPlayer == 2){
@@ -103,9 +107,10 @@ public class ControllerQuiz implements Initializable{
         option3.setToggleGroup(group);
         option4.setToggleGroup(group);
 
-
         changeScore();
         changeQuestion();
+        changePlayer();
+        changeImage();
 
 
         //evento para botao confirm
@@ -134,16 +139,20 @@ public class ControllerQuiz implements Initializable{
                 currentQuestion += 1;
                 changeScore();
                 changeQuestion();
+                changePlayer();
 
                 //desmarca a opcao selecionada
                 group.getSelectedToggle().setSelected(false);
             }
+            //muda para o proximo round
             else if(currentPlayer == totalPlayer && currentRound < totalRound){
                 currentRound += 1;
                 currentPlayer = 1;
                 currentQuestion = 1;
                 changeScore();
                 changeQuestion();
+                changePlayer();
+                changeImage();
 
                 //desmarca a opcao selecionada
                 group.getSelectedToggle().setSelected(false);
@@ -155,14 +164,14 @@ public class ControllerQuiz implements Initializable{
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Fim!");
                 alert.setHeaderText("Obrigado por jogar");
-                alert.setContentText("Aperte OK para ver lista de ranking");
+                alert.setContentText("Aperte OK para ver lista de jogadores");
                 alert.showAndWait();
 
                 try {
                     Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("View/report.fxml"));
                     Stage report = new Stage();
                     report.setTitle("Resultados");
-                    Scene scene = new Scene(root, 800, 600);
+                    Scene scene = new Scene(root, 600, 400);
                     scene.getStylesheets().add("View/style.css");
                     report.setScene(scene);
                     report.setResizable(false);
@@ -315,5 +324,49 @@ public class ControllerQuiz implements Initializable{
         score2.setText(String.valueOf(jogador2.getPontos()));
         score3.setText(String.valueOf(jogador3.getPontos()));
         score4.setText(String.valueOf(jogador4.getPontos()));
+    }
+
+    /**
+     * muda a imagem de acordo com o round
+     */
+    private void changeImage(){
+        switch (currentRound){
+            case 1: pictureRound.setImage(image1);
+                break;
+            case 2: pictureRound.setImage(image2);
+                break;
+            case 3: pictureRound.setImage(image3);
+                break;
+            case 4: pictureRound.setImage(image4);
+                break;
+        }
+    }
+
+    /**
+     * altera a cor do label nome do jogador atual
+     */
+    private void changePlayer(){
+        switch (currentPlayer){
+            case 1: name1.setTextFill(Color.YELLOW);
+                name2.setTextFill(Color.BLACK);
+                name3.setTextFill(Color.BLACK);
+                name4.setTextFill(Color.BLACK);
+                break;
+            case 2: name2.setTextFill(Color.YELLOW);
+                name1.setTextFill(Color.BLACK);
+                name3.setTextFill(Color.BLACK);
+                name4.setTextFill(Color.BLACK);
+                break;
+            case 3: name3.setTextFill(Color.YELLOW);
+                name1.setTextFill(Color.BLACK);
+                name2.setTextFill(Color.BLACK);
+                name4.setTextFill(Color.BLACK);
+                break;
+            case 4: name4.setTextFill(Color.YELLOW);
+                name1.setTextFill(Color.BLACK);
+                name2.setTextFill(Color.BLACK);
+                name3.setTextFill(Color.BLACK);
+                break;
+        }
     }
 }

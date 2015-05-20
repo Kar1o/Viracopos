@@ -4,16 +4,15 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <Pane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ControllerQuiz">
    <children>
-      <TextArea fx:id="question" layoutX="260.0" layoutY="140.0" prefHeight="280.0" prefWidth="480.0" />
+      <TextArea fx:id="question" layoutX="265.0" layoutY="140.0" prefHeight="280.0" prefWidth="480.0" />
       <Button fx:id="confirm" layoutX="600.0" layoutY="510.0" mnemonicParsing="false" text="Confirma" />
       <Label fx:id="name1" layoutX="75.0" layoutY="45.0" text="Label" />
       <Label fx:id="name2" layoutX="265.0" layoutY="45.0" text="Label" />
       <Label fx:id="name3" layoutX="450.0" layoutY="45.0" text="Label" />
       <Label fx:id="name4" layoutX="650.0" layoutY="45.0" text="Label" />
-      <ImageView fx:id="pictureRound" fitHeight="150.0" fitWidth="170.0" layoutX="50.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="pictureRound" fitHeight="250.0" fitWidth="220.0" layoutX="21.0" layoutY="155.0" pickOnBounds="true" preserveRatio="true" />
       <RadioButton fx:id="option1" layoutX="50.0" layoutY="480.0" mnemonicParsing="false" text="A" />
       <RadioButton fx:id="option2" layoutX="50.0" layoutY="540.0" mnemonicParsing="false" text="C" />
       <RadioButton fx:id="option3" layoutX="300.0" layoutY="480.0" mnemonicParsing="false" text="B" />

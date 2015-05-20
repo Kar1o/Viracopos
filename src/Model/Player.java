@@ -6,11 +6,10 @@ package Model;
 public class Player {
     private int id;
     private String nome;
-    private int pontos;
+    private int pontos = 0;
 
     public Player(String nome) {
         this.nome = nome;
-        this.pontos = 0;
     }
 
     public Player() {
