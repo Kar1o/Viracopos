@@ -55,6 +55,8 @@ public class ControllerQuiz implements Initializable{
 
     private Round round = new Round();
 
+    Integer[] randomArray = {1, 2, 3, 4};
+
     private int currentQuestion = 1, currentRound = 1, currentPlayer = 1, totalRound = 0;
 
     private final int totalPlayer = Integer.parseInt(ControllerJogador.parameters);
@@ -292,7 +294,7 @@ public class ControllerQuiz implements Initializable{
             if (totalRound == 0){
                 totalRound = connectData.selectTotalRound();
             }
-            round = connectData.selectQuestions(currentRound, currentQuestion);
+            round = connectData.selectQuestions(currentRound, randomQuestion());
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -368,5 +370,13 @@ public class ControllerQuiz implements Initializable{
                 name3.setTextFill(Color.BLACK);
                 break;
         }
+    }
+
+    private int randomQuestion(){
+        if(currentQuestion == 1) {
+            Collections.shuffle(Arrays.asList(randomArray));
+        }
+
+        return randomArray[currentQuestion - 1];
     }
 }

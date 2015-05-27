@@ -24,25 +24,16 @@ public class ControllerReport implements Initializable {
     @FXML
     private ListView<String> listPlayer;
 
-    private ObservableList data = FXCollections.observableArrayList();
-
     private ConnectData connectData = new ConnectData();
-
 
     @Override
     public void initialize(URL url, final ResourceBundle resourceBundle) {
-        title.setText("Lista de Jogadores");
+        title.setText("Ranking");
 
         try {
             connectData.open();
-            int totalPlayer = connectData.selectTotalPlayer();
-            for (int i = 1; i <= totalPlayer; i++) {
-
-                String player = connectData.selectPlayers(i);
-                data.add(player);
-
-            }
-            listPlayer.setItems(data);
+            ObservableList<String> observableList = FXCollections.observableArrayList(connectData.selectPlayers());
+            listPlayer.setItems(observableList);
         } catch (SQLException e) {
             e.printStackTrace();
         }

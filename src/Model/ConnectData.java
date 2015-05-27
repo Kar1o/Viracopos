@@ -1,7 +1,13 @@
 package Model;
 
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by k on 5/3/15.
  */
@@ -16,6 +22,8 @@ public class ConnectData {
     private final String URL = "jdbc:mariadb://23.239.18.68:3306/";
     private final String USER = "admin";
     private final String PASSWD = "m1IgIOUY4ekY";
+
+    private List<String> data = new ArrayList<String>();
 
     public Round selectQuestions(int round, int index) throws SQLException {
         statement = connection.createStatement();
@@ -34,14 +42,17 @@ public class ConnectData {
         return roundNew;
     }
 
-    public String selectPlayers(int player) throws SQLException {
+    public List selectPlayers() throws SQLException {
 
         statement = connection.createStatement();
-        resultSet = statement.executeQuery("select jogador_id, nome, score from " + DB + ".jogador where jogador_id = " + player);
-        resultSet.next();
+        resultSet = statement.executeQuery("select jogador_id, nome, score from " + DB + ".jogador order by score desc");
+        while(resultSet.next()) {
 
-        String playerNew = resultSet.getInt("jogador_id") + "   -  Nome: " +  resultSet.getString("nome") + "  Pontos: " +  resultSet.getInt("score");
-        return playerNew;
+            String playerNew = resultSet.getInt("jogador_id") + "   -  Nome: " + resultSet.getString("nome") + "  Pontos: " + resultSet.getInt("score");
+            data.add(playerNew);
+
+        }
+        return data;
     }
 
     public int selectTotalPlayer() throws SQLException {
