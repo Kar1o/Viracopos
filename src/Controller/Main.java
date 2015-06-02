@@ -13,7 +13,7 @@ public class Main extends Application {
 
         Parent root = FXMLLoader.load(getClass().getResource("../View/qtd_jogador.fxml"));
         stage.setTitle("Viracopos");
-        Scene scene = new Scene(root, 600, 450);
+        Scene scene = new Scene(root, 400, 300);
         scene.getStylesheets().add("View/style.css");
         stage.setScene(scene);
         stage.setResizable(false);

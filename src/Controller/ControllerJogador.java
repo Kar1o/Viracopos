@@ -54,10 +54,10 @@ public class ControllerJogador implements Initializable{
         parameters = choicePlayer.getValue().toString();
 
         try {
-            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("View/nome_jogador.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("../View/nome_jogador.fxml"));
             Stage stage = new Stage();
             stage.setTitle("Viracopos");
-            Scene scene = new Scene(root, 600, 450);
+            Scene scene = new Scene(root, 640, 480);
             scene.getStylesheets().add("View/style.css");
             stage.setScene(scene);
             stage.setResizable(false);

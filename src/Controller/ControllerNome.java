@@ -46,15 +46,13 @@ public class ControllerNome implements Initializable{
     public void initialize(URL url, final ResourceBundle resourceBundle) {
 
         //elimina jogadores nao existentes e ajusta posicao dos existentes
-        if (totalPlayer == 2) {
-            lblPlayer3.setVisible(false);
-            player3.setVisible(false);
+        if (totalPlayer <= 3) {
             lblPlayer4.setVisible(false);
             player4.setVisible(false);
-        }
-        else if (totalPlayer == 3) {
-            lblPlayer4.setVisible(false);
-            player4.setVisible(false);
+            if (totalPlayer == 2){
+                lblPlayer3.setVisible(false);
+                player3.setVisible(false);
+            }
         }
 
         btnStart.setOnAction(new EventHandler<ActionEvent>() {
@@ -71,6 +69,7 @@ public class ControllerNome implements Initializable{
      * @param actionEvent utilizado para identificar janela atual
      */
     private void buttonAction(ActionEvent actionEvent){
+
         if ((player1.getText().equals("") || player2.getText().equals(""))
                 && totalPlayer == 2) {
             warningMessage("Insira nome em todos os campos!");
@@ -91,10 +90,10 @@ public class ControllerNome implements Initializable{
             parameters.add(player4.getText());
 
             try {
-                Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("View/quiz.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("../View/quiz.fxml"));
                 Stage stage = new Stage();
                 stage.setTitle("Viracopos");
-                Scene scene = new Scene(root, 800, 600);
+                Scene scene = new Scene(root, 1024, 720);
                 scene.getStylesheets().add("View/style.css");
                 stage.setScene(scene);
                 stage.setResizable(false);
@@ -115,6 +114,7 @@ public class ControllerNome implements Initializable{
      * @param message texto de aviso para a janela
      */
     public static void warningMessage(String message){
+
         final Stage dialog = new Stage();
 
         //faz a janela nova bloquear a anterior

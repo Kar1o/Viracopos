@@ -55,7 +55,7 @@ public class ControllerQuiz implements Initializable{
 
     private Round round = new Round();
 
-    Integer[] randomArray = {1, 2, 3, 4};
+    private Integer[] questionArray = {1, 2, 3, 4};
 
     private int currentQuestion = 1, currentRound = 1, currentPlayer = 1, totalRound = 0;
 
@@ -65,6 +65,7 @@ public class ControllerQuiz implements Initializable{
     private final Image image2 = new Image("View/Images/round-2.jpg");
     private final Image image3 = new Image("View/Images/round-3.jpg");
     private final Image image4 = new Image("View/Images/round-4.jpg");
+    private final Image image5 = new Image("View/Images/round-5.jpg");
 
 
     @Override
@@ -76,22 +77,22 @@ public class ControllerQuiz implements Initializable{
             name4.setVisible(false);
             score3.setVisible(false);
             score4.setVisible(false);
-            name1.setLayoutX(220);
-            name2.setLayoutX(520);
-            score1.setLayoutX(220);
-            score2.setLayoutX(520);
+            name1.setLayoutX(300);
+            score1.setLayoutX(300);
+            name2.setLayoutX(700);
+            score2.setLayoutX(700);
             name1.setText(jogador1.getNome());
             name2.setText(jogador2.getNome());
         }
         else if (totalPlayer == 3){
             name4.setVisible(false);
             score4.setVisible(false);
-            name1.setLayoutX(200);
-            name2.setLayoutX(400);
-            name3.setLayoutX(600);
-            score1.setLayoutX(200);
-            score2.setLayoutX(400);
-            score3.setLayoutX(600);
+            name1.setLayoutX(250);
+            score1.setLayoutX(250);
+            name2.setLayoutX(500);
+            score2.setLayoutX(500);
+            name3.setLayoutX(750);
+            score3.setLayoutX(750);
             name1.setText(jogador1.getNome());
             name2.setText(jogador2.getNome());
             name3.setText(jogador3.getNome());
@@ -170,10 +171,10 @@ public class ControllerQuiz implements Initializable{
                 alert.showAndWait();
 
                 try {
-                    Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("View/report.fxml"));
+                    Parent root = FXMLLoader.load(getClass().getResource("../View/report.fxml"));
                     Stage report = new Stage();
                     report.setTitle("Resultados");
-                    Scene scene = new Scene(root, 600, 400);
+                    Scene scene = new Scene(root, 640, 480);
                     scene.getStylesheets().add("View/style.css");
                     report.setScene(scene);
                     report.setResizable(false);
@@ -195,46 +196,24 @@ public class ControllerQuiz implements Initializable{
      * insere no banco o nome e nota dos jogadores
      */
     private void insertJogadorData(){
-        if (totalPlayer == 2) {
-            try {
-                connectData.open();
-                connectData.insertPlayers(jogador1.getNome(), jogador1.getPontos());
-                connectData.insertPlayers(jogador2.getNome(), jogador2.getPontos());
 
-            } catch (SQLException e) {
-                e.printStackTrace();
-            } finally {
-                connectData.close();
-            }
-        }
-
-        else if (totalPlayer == 3) {
-            try {
-                connectData.open();
-                connectData.insertPlayers(jogador1.getNome(), jogador1.getPontos());
-                connectData.insertPlayers(jogador2.getNome(), jogador2.getPontos());
-                connectData.insertPlayers(jogador3.getNome(), jogador3.getPontos());
-            } catch (SQLException e) {
-                e.printStackTrace();
-            } finally {
-                connectData.close();
-            }
-        }
-        else{
-            try {
-                connectData.open();
-                connectData.insertPlayers(jogador1.getNome(), jogador1.getPontos());
-                connectData.insertPlayers(jogador2.getNome(), jogador2.getPontos());
-                connectData.insertPlayers(jogador3.getNome(), jogador3.getPontos());
+        try {
+        connectData.open();
+        connectData.insertPlayers(jogador1.getNome(), jogador1.getPontos());
+        connectData.insertPlayers(jogador2.getNome(), jogador2.getPontos());
+        if (totalPlayer >= 3){
+            connectData.insertPlayers(jogador3.getNome(), jogador3.getPontos());
+            if (totalPlayer == 4){
                 connectData.insertPlayers(jogador4.getNome(), jogador4.getPontos());
-            } catch (SQLException e) {
-                e.printStackTrace();
-            } finally {
-                connectData.close();
             }
-
-
         }
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+    } finally {
+        connectData.close();
+    }
+
     }
 
     /**
@@ -249,17 +228,20 @@ public class ControllerQuiz implements Initializable{
                 assignScoreValue();
             }
 
-        }else if (selectedRadio.equals("option2")){
+        }
+        else if (selectedRadio.equals("option2")){
             if (option2.getText().equals(round.getAnswer1())){
                 assignScoreValue();
             }
 
-        }else if (selectedRadio.equals("option3")){
+        }
+        else if (selectedRadio.equals("option3")){
             if (option3.getText().equals(round.getAnswer1())){
                 assignScoreValue();
             }
 
-        }else if (selectedRadio.equals("option4")){
+        }
+        else if (selectedRadio.equals("option4")){
             if (option4.getText().equals(round.getAnswer1())){
                 assignScoreValue();
             }
@@ -271,17 +253,16 @@ public class ControllerQuiz implements Initializable{
      * verifica o jogador atual e adiciona ponto
      */
     private void assignScoreValue(){
-        if (currentPlayer == 1){
-            jogador1.setPontos(1);
-        }
-        else if (currentPlayer == 2){
-            jogador2.setPontos(1);
-        }
-        else if (currentPlayer == 3){
-            jogador3.setPontos(1);
-        }
-        else if (currentPlayer == 4){
-            jogador4.setPontos(1);
+
+        switch (currentPlayer){
+            case 1: jogador1.setPontos();
+                break;
+            case 2: jogador2.setPontos();
+                break;
+            case 3: jogador3.setPontos();
+                break;
+            case 4: jogador4.setPontos();
+                break;
         }
     }
 
@@ -289,12 +270,16 @@ public class ControllerQuiz implements Initializable{
      * joga pergunta e cada resposta em um RadioButton
      */
     private void changeQuestion() {
+
         try {
             connectData.open();
             if (totalRound == 0){
                 totalRound = connectData.selectTotalRound();
             }
-            round = connectData.selectQuestions(currentRound, randomQuestion());
+            if(currentQuestion == 1) {
+                Collections.shuffle(Arrays.asList(questionArray));
+            }
+            round = connectData.selectQuestions(currentRound, questionArray[currentQuestion - 1]);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -332,6 +317,7 @@ public class ControllerQuiz implements Initializable{
      * muda a imagem de acordo com o round
      */
     private void changeImage(){
+
         switch (currentRound){
             case 1: pictureRound.setImage(image1);
                 break;
@@ -341,6 +327,8 @@ public class ControllerQuiz implements Initializable{
                 break;
             case 4: pictureRound.setImage(image4);
                 break;
+            case 5: pictureRound.setImage(image5);
+                break;
         }
     }
 
@@ -348,35 +336,28 @@ public class ControllerQuiz implements Initializable{
      * altera a cor do label nome do jogador atual
      */
     private void changePlayer(){
+
         switch (currentPlayer){
-            case 1: name1.setTextFill(Color.YELLOW);
+            case 1: name1.setTextFill(Color.RED);
                 name2.setTextFill(Color.BLACK);
                 name3.setTextFill(Color.BLACK);
                 name4.setTextFill(Color.BLACK);
                 break;
-            case 2: name2.setTextFill(Color.YELLOW);
+            case 2: name2.setTextFill(Color.RED);
                 name1.setTextFill(Color.BLACK);
                 name3.setTextFill(Color.BLACK);
                 name4.setTextFill(Color.BLACK);
                 break;
-            case 3: name3.setTextFill(Color.YELLOW);
+            case 3: name3.setTextFill(Color.RED);
                 name1.setTextFill(Color.BLACK);
                 name2.setTextFill(Color.BLACK);
                 name4.setTextFill(Color.BLACK);
                 break;
-            case 4: name4.setTextFill(Color.YELLOW);
+            case 4: name4.setTextFill(Color.RED);
                 name1.setTextFill(Color.BLACK);
                 name2.setTextFill(Color.BLACK);
                 name3.setTextFill(Color.BLACK);
                 break;
         }
-    }
-
-    private int randomQuestion(){
-        if(currentQuestion == 1) {
-            Collections.shuffle(Arrays.asList(randomArray));
-        }
-
-        return randomArray[currentQuestion - 1];
     }
 }

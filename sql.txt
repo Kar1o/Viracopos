@@ -11,57 +11,68 @@ round_nome varchar(100)
 
 create table perguntas (
 pergunta_id int PRIMARY KEY,
-pergunta varchar(250),
+pergunta varchar(350),
 indice int check (indice<=4),
 round_id int references round(round_id)
 )
 
 create table respostas (
 pergunta_id int PRIMARY KEY REFERENCES perguntas(pergunta_id),
-resposta1 varchar(50),
-resposta2 varchar(50),
-resposta3 varchar(50),
-resposta4 varchar(50)
+resposta1 varchar(250),
+resposta2 varchar(250),
+resposta3 varchar(250),
+resposta4 varchar(250)
 )
 
-insert into Viracopos.round values(1, "embarque")
-insert into Viracopos.round values(2, "imposto")
-insert into Viracopos.round values(3, "desembarque")
-insert into Viracopos.round values(4, "policia federal")
+insert into Viracopos.round values(1, "Instituições Intervenientes")
+insert into Viracopos.round values(2, "Controle Administrativo e Comercial")
+insert into Viracopos.round values(3, "Controle Aduaneiro")
+insert into Viracopos.round values(4, "Câmbio e Controle Cambial")
+insert into Viracopos.round values(5, "Contratos Internacionais")
 
-insert into Viracopos.perguntas values(1,"Pergunta 1-1", 1, 1)
-insert into Viracopos.perguntas values(2,"Pergunta 1-2", 2, 1)
-insert into Viracopos.perguntas values(3,"Pergunta 1-3", 3, 1)
-insert into Viracopos.perguntas values(4,"Pergunta 1-4", 4, 1)
-insert into Viracopos.perguntas values(5,"Pergunta 2-1", 1, 2)
-insert into Viracopos.perguntas values(6,"Pergunta 2-2", 2, 2)
-insert into Viracopos.perguntas values(7,"Pergunta 2-3", 3, 2)
-insert into Viracopos.perguntas values(8,"Pergunta 2-4", 4, 2)
-insert into Viracopos.perguntas values(9,"Pergunta 3-1", 1, 3)
-insert into Viracopos.perguntas values(10,"Pergunta 3-2", 2, 3)
-insert into Viracopos.perguntas values(11,"Pergunta 3-3", 3, 3)
-insert into Viracopos.perguntas values(12,"Pergunta 3-4", 4, 3)
-insert into Viracopos.perguntas values(13,"Pergunta 4-1", 1, 4)
-insert into Viracopos.perguntas values(14,"Pergunta 4-2", 2, 4)
-insert into Viracopos.perguntas values(15,"Pergunta 4-3", 3, 4)
-insert into Viracopos.perguntas values(16,"Pergunta 4-4", 4, 4)
+insert into Viracopos.perguntas values(1,"A Execução e o acompanhamento da política cambial são atribuições da(o):", 1, 1)
+insert into Viracopos.perguntas values(2,"Compete à Secretaria da receita Federal – SRF", 2, 1)
+insert into Viracopos.perguntas values(3,"As instituições aduaneiras têm por funções primordiais:", 3, 1)
+insert into Viracopos.perguntas values(4,"A Secretaria de Comércio Exterior – Secex – tem entre suas principais atribuições e objetivos:", 4, 1)
+insert into Viracopos.perguntas values(5,"Por licenciamento entende-se o regime administrativo que faz valer a necessidade de uma licença como condição para importar mercadorias. Pode ser automático e não automático. Em face do enunciado, assinale a opção correta", 1, 2)
+insert into Viracopos.perguntas values(6,"Sobre o Registro de Exportação (RE), é correto afirmar-se que:", 2, 2)
+insert into Viracopos.perguntas values(7,"O licenciamento não automático previamente ao embarque das mercadorias no exterior é exigível para as importações:", 3, 2)
+insert into Viracopos.perguntas values(8,"Sujeitam-se ao licenciamento não automático previamente ao embarque as importações:", 4, 2)
+insert into Viracopos.perguntas values(9,"O procedimento administrativo, mediante o qual se processa o desembraço aduaneiro de mercadoria procedente do exterior, em que se identifica o contribuinte e a mercadoria, apura-se o valor tributável, calcula-se o montante dos tributos devidos, define o que seja:", 1, 3)
+insert into Viracopos.perguntas values(10,"O procedimento administrativo que se destina a constatar a ocorrência de falta ou acréscimo de volume ou de mercadoria entrada no território aduaneiro, em que se comparam os registros de descarga com os dados constantes no manifesto, refere-se à atividade atinente:", 2, 3)
+insert into Viracopos.perguntas values(11,"Área Administração Tributária) Relativamente ao veículo transportador, a mercadoria procedente do exterior por qualquer via deverá estar registrada:", 3, 3)
+insert into Viracopos.perguntas values(12,"Área Administração Tributária) A posse ou propriedade da mercadoria importada para efeito do despacho aduaneiro é requisito inerente:", 4, 3)
+insert into Viracopos.perguntas values(13,"A modalidade de remessa cambial em que um banco, atuando como intermediário, compromete-se a efetuar o pagamento de uma operação comercial ao exportador é:", 1, 4)
+insert into Viracopos.perguntas values(14,"A liquidação da Carta de Crédito utilizada nas operações internacionais é de responsabilidade do(da):", 2, 4)
+insert into Viracopos.perguntas values(15,"Em operações futuras, a taxa cambial:", 3, 4)
+insert into Viracopos.perguntas values(16,"Um mercado cambial supõe a realização de diferentes transações. Indique, nas opções abaixo, as transações que não estão previstas em um mercado cambial.", 4, 4)
+insert into Viracopos.perguntas values(17,"Sob a regra do Incoterm CFR-Exportação (Custo e Frete), a obrigação de contratar seguro marítimo recai sobre:", 1, 5)
+insert into Viracopos.perguntas values(18,"A contratação do transportador internacional sob o regime Free on Board – FOB é de responsabilidade do (da):", 2, 5)
+insert into Viracopos.perguntas values(19,"Ao se eleger um Incoterm para uma operação comercial, as partes definem:", 3, 5)
+insert into Viracopos.perguntas values(20,"Os Incoterms contém em seu bojo cláusulas padronizadas que, nas essência, resumem, definem e simplificam um contrato internacional de:", 4, 5)
 
-insert into Viracopos.respostas values(1, "Resposta1-1", "Resposta1-2", "Resposta1-3", "Resposta1-4")
-insert into Viracopos.respostas values(2, "Resposta2-1", "Resposta2-2", "Resposta2-3", "Resposta2-4")
-insert into Viracopos.respostas values(3, "Resposta3-1", "Resposta3-2", "Resposta3-3", "Resposta3-4")
-insert into Viracopos.respostas values(4, "Resposta4-1", "Resposta4-2", "Resposta4-3", "Resposta4-4")
-insert into Viracopos.respostas values(5, "Resposta5-1", "Resposta5-2", "Resposta5-3", "Resposta5-4")
-insert into Viracopos.respostas values(6, "Resposta6-1", "Resposta6-2", "Resposta6-3", "Resposta6-4")
-insert into Viracopos.respostas values(7, "Resposta7-1", "Resposta7-2", "Resposta7-3", "Resposta7-4")
-insert into Viracopos.respostas values(8, "Resposta8-1", "Resposta8-2", "Resposta8-3", "Resposta8-4")
-insert into Viracopos.respostas values(9, "Resposta9-1", "Resposta9-2", "Resposta9-3", "Resposta9-4")
-insert into Viracopos.respostas values(10, "Resposta10-1", "Resposta10-2", "Resposta10-3", "Resposta10-4")
-insert into Viracopos.respostas values(11, "Resposta11-1", "Resposta11-2", "Resposta11-3", "Resposta11-4")
-insert into Viracopos.respostas values(12, "Resposta12-1", "Resposta12-2", "Resposta12-3", "Resposta12-4")
-insert into Viracopos.respostas values(13, "Resposta13-1", "Resposta13-2", "Resposta13-3", "Resposta13-4")
-insert into Viracopos.respostas values(14, "Resposta14-1", "Resposta14-2", "Resposta14-3", "Resposta14-4")
-insert into Viracopos.respostas values(15, "Resposta15-1", "Resposta15-2", "Resposta15-3", "Resposta15-4")
-insert into Viracopos.respostas values(16, "Resposta16-1", "Resposta16-2", "Resposta16-3", "Resposta16-4")
+
+insert into Viracopos.respostas values(1, "Banco Central do Brasil", "Câmera de Comércio Exterior", "Conselho Monetário Nacional", "Banco do Brasil")
+insert into Viracopos.respostas values(2,"elaborar pesquisa de mercado externo, coletar, processar, acompanhar e difundir informações sobre oportunidades comerciais e de investimentos para o Brasil","estabelecer diretrizes para a política de desregulamentação do Comércio Exterior","financiar diretamente a produção nacional de bens a exportar","formular propostas de políticas e de programas de promoção do Comércio Exterior")
+insert into Viracopos.respostas values(3,"o controle do fluxo de mercadorias que ingressam ou saem do país em caráter definitivo ou temporário em decorrência das operações de comércio internacional e a aplicação de tarifa aduaneira sobre tais operações","o recolhimento de impostos associados a operações comerciais bem como de outras atividades de natureza não econômica","a vigilância das áreas de fronteira e controle de pessoas e passaportes nas mesmas","o recolhimento de tributos que incidem sobre as importações e a circulação de mercadorias")
+insert into Viracopos.respostas values(4,"coordenar a aplicação da defesa contra práticas desleais de Comércio Exterior, bem como de medidas de salvaguardas comerciais","administrar os atributos internos e aduaneiros da União","certificar os documentos sanitários das exportações brasileiras","propor e estabelecer normas sobre as operações de câmbio no Comércio Exterior")
+insert into Viracopos.respostas values(5,"O licenciamento não automático condiciona a importação ao exame de certos requisitos e condições elencadas na norma administrativa","O licenciamento não automático implica a proibição da importação","O licenciamento não automático prescinde de exame por parte da autoridade administrativa","O licenciamento automático dá-se através da emissão de uma Guia de Importação")
+insert into Viracopos.respostas values(6,"é realizado previamente à declaração para despacho aduaneiro e ao embarque da mercadoria contendo informações comerciais, fiscais e cambiais relativas à operação de exportação","é realizado anteriormente ao Registro de Venda (RV) e reúne as informações comerciais e cambiais relativas à operação de exportação","é emitido ao final da operação de exportação e reúne todos os registros feitos em etapas prévias","reúne as informações financeiras necessárias à emissão posterior do Comprovante de Exportação (CE)")
+insert into Viracopos.respostas values(7,"objeto de medidas compensatórias em decorrência de subsídios concedidos por governos estrangeiros","sujeitas à obtenção de cota tarifária amparadas em acordos bilaterais no âmbito da União Europeia, excluídas aquelas sujeitas à cota não tarifária","sujeitas a exame de similaridade e as objeto de arrendamento operacional simples","a serem submetidas ao regime aduaneiro especial de entreposto aduaneiro na modalidade de não vinculado")
+insert into Viracopos.respostas values(8,"sujeitas à obtenção de cota tarifária","de maneiras de reposição e conserto para uso de embarcações ou aeronaves estrangeiras","sob regime de admissão temporária, exceto quando se tratar de obras Audiovisual do Ministério da Cultura","sob regimes aduaneiros especiais de entreposto aduaneiro e entreposto industrial")
+insert into Viracopos.respostas values(9,"lançamento do imposto de importação","vistoria aduaneira","despacho aduaneiro","conferência aduaneira")
+insert into Viracopos.respostas values(10,"à conferência final de manifesto","à vistoria aduaneira","à conferência aduaneira","à revisão aduaneira")
+insert into Viracopos.respostas values(11,"no manifesto de carga ou documento equivalente","nas cópias dos conhecimentos de carga","nas guias de importação correspondentes","nos originais das faturas comerciais")
+insert into Viracopos.respostas values(12,"ao conhecimento de carga original","à fatura comercial","ao certificado de origem","à declaração de importação")
+insert into Viracopos.respostas values(13,"carta de crédito","cobrança à vista","remessa sem saque","cobrança a prazo")
+insert into Viracopos.respostas values(14,"banco emitente","importador","Banco Central do país importador","exportador")
+insert into Viracopos.respostas values(15,"é fixada no momento da contratação do câmbio","é fixada no momento da liquidação do câmbio","é determinada pelo Banco Central","corresponde ao valor médio das taxas praticadas nos dias da contratação e da liquidação do câmbio")
+insert into Viracopos.respostas values(16,"Transações entre bancos centrais e bancos privados em diferentes países","Transações entre bancos privados e clientes no mesmo país","Transações entre o Banco Central e bancos privados no mesmo país","Transações entre bancos privados de diferentes países")
+insert into Viracopos.respostas values(17,"o importador","o vendedor","o transportador","a agência de financiamento à exportação")
+insert into Viracopos.respostas values(18,"importador","exportador","porto de embarque da mercadoria","agência de seguro marítimo")
+insert into Viracopos.respostas values(19,"suas obrigações respectivas na operação e as condições de venda","a modalidade de transporte e a forma de contratação e liquidação de câmbio","a forma e as condições de pagamento a serem adotadas e o tipo de contrato a ser celebrado","a modalidade de transporte e os riscos a serem cobertos por seguro internacional")
+insert into Viracopos.respostas values(20,"compra e venda","arrendamento mercantil","leasing operacional","importação de serviços")
+
 
 select pergunta, resposta1, resposta2, resposta3, resposta4, round_nome from Viracopos.respostas, Viracopos.perguntas, Viracopos.round
 where perguntas.pergunta_id = respostas.pergunta_id && perguntas.round_id = round.round_id

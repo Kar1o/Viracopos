@@ -1,9 +1,5 @@
 package Model;
 
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,22 +51,12 @@ public class ConnectData {
         return data;
     }
 
-    public int selectTotalPlayer() throws SQLException {
-        statement = connection.createStatement();
-        resultSet = statement.executeQuery("select count(jogador_id) as total from " + DB + ".jogador");
-        resultSet.next();
-
-        int max = resultSet.getInt("total");
-        return max;
-    }
-
     public int selectTotalRound() throws SQLException {
         statement = connection.createStatement();
         resultSet = statement.executeQuery("select max(round_id) as total from " + DB + ".round");
         resultSet.next();
 
-        int max = resultSet.getInt("total");
-        return max;
+        return resultSet.getInt("total");
     }
 
     public void insertPlayers(String name, int score) throws SQLException {

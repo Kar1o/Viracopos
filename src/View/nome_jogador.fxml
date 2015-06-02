@@ -4,18 +4,30 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="400.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ControllerNome">
+<Pane minHeight="480.0" minWidth="640.0" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ControllerNome">
    <children>
-      <TextArea fx:id="player1" layoutX="331.0" layoutY="80.0" prefHeight="40.0" prefWidth="200.0" />
-      <TextArea fx:id="player2" layoutX="331.0" layoutY="140.0" prefHeight="40.0" prefWidth="200.0" />
-      <TextArea fx:id="player3" layoutX="331.0" layoutY="200.0" prefHeight="40.0" prefWidth="200.0" />
-      <TextArea fx:id="player4" layoutX="331.0" layoutY="260.0" prefHeight="40.0" prefWidth="200.0" />
-      <Button fx:id="btnStart" layoutX="246.0" layoutY="345.0" mnemonicParsing="false" text="Começar Jogo" />
-      <Label layoutX="97.0" layoutY="100.0" text="Jogador 1" />
-      <Label layoutX="97.0" layoutY="153.0" text="Jogador 2" />
-      <Label fx:id="lblPlayer3" layoutX="97.0" layoutY="213.0" text="Jogador 3" />
-      <Label fx:id="lblPlayer4" layoutX="97.0" layoutY="273.0" text="Jogador 4" />
-      <Label layoutX="163.0" layoutY="22.0" text="Escolha o nome dos jogadores" wrapText="true">
+      <TextArea fx:id="player1" layoutX="330.0" layoutY="80.0" prefHeight="45.0" prefWidth="220.0" />
+      <TextArea fx:id="player2" layoutX="330.0" layoutY="150.0" prefHeight="45.0" prefWidth="220.0" />
+      <TextArea fx:id="player3" layoutX="330.0" layoutY="220.0" prefHeight="45.0" prefWidth="220.0" />
+      <TextArea fx:id="player4" layoutX="330.0" layoutY="300.0" prefHeight="45.0" prefWidth="220.0" />
+      <Button fx:id="btnStart" layoutX="266.0" layoutY="400.0" mnemonicParsing="false" prefHeight="40.0" text="Começar Jogo" />
+      <Label layoutX="97.0" layoutY="94.0" text="Jogador 1">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Label layoutX="97.0" layoutY="164.0" text="Jogador 2">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Label fx:id="lblPlayer3" layoutX="97.0" layoutY="234.0" text="Jogador 3">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Label fx:id="lblPlayer4" layoutX="97.0" layoutY="314.0" text="Jogador 4">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Label layoutX="183.0" layoutY="22.0" text="Escolha o nome dos jogadores" wrapText="true">
          <font>
             <Font size="18.0" />
          </font>

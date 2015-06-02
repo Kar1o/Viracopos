@@ -1,12 +1,21 @@
 @startuml
 
 package Controller{
+
+class Main{
++start():void
++{static}main(String[]):void
+}
+
 class ControllerJogador{
 - btnContinue:Button
 - choicePlayer:ChoiceBox
 + {static}parameters:String
-+ initialize():void
+
++initialize(URL, ResourceBundle):void
+- buttonAction(ActionEvent):void
 }
+
 class ControllerNome{
 - player1:TextArea
 - player2:TextArea
@@ -18,8 +27,9 @@ class ControllerNome{
 - totalPlayer:int
 + {static}parameters:List<String>
 
-+initialize():void
-+{static}warnigMessage():void
++initialize(URL, ResourceBundle):void
++{static}warnigMessage(String):void
+-buttonAction(ActionEvent):void
 }
 
 class ControllerQuiz{
@@ -38,78 +48,96 @@ class ControllerQuiz{
 -score3:Label
 -score4:Label
 -pictureRound:ImageView
--GROUP:ToggleGroup
+-group:ToggleGroup
 -answers:List<String>
--questions[][][]:String
--scoreValue1:int
--scoreValue2:int
--scoreValue3:int
--scoreValue4:int
+-jogador1:Player
+-jogador2:Player
+-jogador3:Player
+-jogador4:Player
+-connectData:ConnectData
+-round:Round
+-questionArray:Integer[]
 -currentQuestion:int
--currentPlayer:int
 -currentRound:int
--TOTALROUND:int
--TOTOALPLAYER:int
+-currentPlayer:int
+-totalRound:int
+-totalPlayer:int
+-image1:Image
+-image2:Image
+-image3:Image
+-image4:Image
+
+
 +initialize(URL, ResourceBundle):void
 -buttonAction(ActionEvent):void
+-insertJogadorData():void
 -checkanswer():void
 -assignScoreValue():void
 -changeQuestion():void
 -changeScore():void
+-changeImage():void
+-changePlayer():void
+
 }
 
+class ControllerReport{
+-listPlayer:ListView
+-connectData:ConnectData
 
-class Main{
-+start():void
-+{static}main(String[]):void
++initialize(URL, ResourceBundle):void
 }
+
 }
 
 package Model{
+
 class ConnectData{
+-connection:Connection
+-statement:Statement
+-resultSet:ResultSet
 -DRIVER:String
 -DB:String
 -URL:String
 -USER:String
 -PASSWD:String
+-data:List<String>
 
++selectQuestions(int, int):Round
++selectPlayers():List
++selectTotalRound():int
++insertPlayers(String, int):void
 +open():boolean
 +close():boolean
-+selectQuestion():void
-+selectPlayers():void
 }
 
 class Player{
 +nome:String
 +pontos:int
 
-+getNomes(String):String
-+setNome():void
-+getPontos(int):int
-+setPontos():void
++Player(String)
++getNomes():String
++getPontos():int
++setPontos(int):void
 
 }
 
 class Round{
--round:int
 -question:String
 -answer1:String
 -answer2:String
 -answer3:String
 -answer4:String
 
-+getRound(int):int
-+setRound():void
-+getQuestion(String):String
-+setQuestion():void
-+getAnswer1(String):String
-+setAnswer1():void
-+getAnswer2(String):String
-+setAnswer2():void
-+getAnswer3(String):String
-+setAnswer3():void
-+getAnswer4(String):String
-+setAnswer4():void
++getQuestion():String
++setQuestion(String):void
++getAnswer1():String
++setAnswer1(String):void
++getAnswer2():String
++setAnswer2(String):void
++getAnswer3():String
++setAnswer3(String):void
++getAnswer4():String
++setAnswer4(String):void
 }
 }
 
@@ -117,10 +145,9 @@ class ControllerQuiz ..> class ConnectData
 class ControllerQuiz ..> class Round
 class ControllerQuiz ..> class Player
 
-
-
 class Main "1..1"->"1..1"  ControllerJogador : creates
 class ControllerJogador "1..1"->"1..1" class ControllerNome : creates
 class ControllerNome "1..1"-->"1..1" class ControllerQuiz : creates
+class ControllerQuiz -> class ControllerReport
 
 @enduml
