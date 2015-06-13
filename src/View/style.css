@@ -1,43 +1,50 @@
 .root{
     -fx-background-color : grey;
-    -fx-background-image : url("Images/background.jpg");
+    -fx-background-image : url("Images/backgroundQuiz.jpg");
 }
 
 .label {
     -fx-font-size: 16px;
+    -fx-font-family: "Courrier New";
 }
 
 .button {
     -fx-text-fill: white;
     -fx-font-family: "Arial Narrow";
     -fx-font-weight: bold;
-    -fx-background-color: linear-gradient(#54DE60, #3A8C40);
-    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    -fx-background-color: linear-gradient(#007F5F, #00FF5F);
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) ,5,0.0,0,1 );
 }
 
 .choice-box {
     -fx-font-size: 14px;
     -fx-text-fill: #333333;
-    -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
-
+    -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) ,0,0,0,1 );
 }
 
 .radio-button {
     -fx-font-size: 14px;
     -fx-font-family: "Arial Narrow";
-    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    -fx-background-color: #87CEFA;
+    -fx-border-radius: 10 10 10 10;
+    -fx-background-radius: 10 10 10 10;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) ,5,0.0,0,1 );
 }
 
-.text-area {
+#question {
     -fx-font-size: 16px;
     -fx-font-color: white;
+    -fx-background-color: #87CEFA;
     -fx-font-family: "Sans Serif";
+    -fx-border-radius: 10 10 10 10;
+    -fx-background-radius: 10 10 10 10;
 }
 
 .radio-button:focused {
-    -fx-focus-color: #FF0000;
+    -fx-focus-color: #FFAA00;
+    -fx-background-color: #AAFFFF;
 }
 
 .button:hover {
-    -fx-background-color: linear-gradient(#3A8C40, #54DE60);
+    -fx-background-color: linear-gradient(#00FF5F, #007F5F);
 }

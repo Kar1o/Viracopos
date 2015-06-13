@@ -21,7 +21,7 @@ import java.util.ResourceBundle;
 public class ControllerJogador implements Initializable{
 
     @FXML
-    private Button btnContinue;
+    private Button btnContinue, btnRank;
 
     @FXML
     private ChoiceBox choicePlayer;
@@ -48,6 +48,13 @@ public class ControllerJogador implements Initializable{
             }
         });
 
+        btnRank.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                buttonRank(actionEvent);
+            }
+        });
+
     }
 
     private void buttonAction(ActionEvent actionEvent){
@@ -66,6 +73,25 @@ public class ControllerJogador implements Initializable{
             //esconder janela atual
             ((Node)(actionEvent.getSource())).getScene().getWindow().hide();
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void buttonRank(ActionEvent actionEvent){
+
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("../View/report.fxml"));
+            Stage report = new Stage();
+            report.setTitle("Resultados");
+            Scene scene = new Scene(root, 640, 480);
+            scene.getStylesheets().add("View/style.css");
+            report.setScene(scene);
+            report.setResizable(false);
+            report.show();
+
+            //esconder janela atual
+            ((Node) (actionEvent.getSource())).getScene().getWindow().hide();
         } catch (IOException e) {
             e.printStackTrace();
         }

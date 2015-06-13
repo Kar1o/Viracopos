@@ -15,6 +15,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -25,7 +26,7 @@ import java.util.*;
 public class ControllerQuiz implements Initializable{
 
     @FXML
-    private TextArea question;
+    private Label question;
 
     @FXML
     private Button confirm;
@@ -77,22 +78,22 @@ public class ControllerQuiz implements Initializable{
             name4.setVisible(false);
             score3.setVisible(false);
             score4.setVisible(false);
-            name1.setLayoutX(300);
-            score1.setLayoutX(300);
-            name2.setLayoutX(700);
-            score2.setLayoutX(700);
+            name1.setLayoutY(250);
+            score1.setLayoutY(280);
+            name2.setLayoutY(420);
+            score2.setLayoutY(450);
             name1.setText(jogador1.getNome());
             name2.setText(jogador2.getNome());
         }
         else if (totalPlayer == 3){
             name4.setVisible(false);
             score4.setVisible(false);
-            name1.setLayoutX(250);
-            score1.setLayoutX(250);
-            name2.setLayoutX(500);
-            score2.setLayoutX(500);
-            name3.setLayoutX(750);
-            score3.setLayoutX(750);
+            name1.setLayoutY(170);
+            score1.setLayoutY(200);
+            name2.setLayoutY(350);
+            score2.setLayoutY(380);
+            name3.setLayoutY(530);
+            score3.setLayoutY(560);
             name1.setText(jogador1.getNome());
             name2.setText(jogador2.getNome());
             name3.setText(jogador3.getNome());
@@ -338,22 +339,22 @@ public class ControllerQuiz implements Initializable{
     private void changePlayer(){
 
         switch (currentPlayer){
-            case 1: name1.setTextFill(Color.RED);
+            case 1: name1.setTextFill(Paint.valueOf("0000FF"));
                 name2.setTextFill(Color.BLACK);
                 name3.setTextFill(Color.BLACK);
                 name4.setTextFill(Color.BLACK);
                 break;
-            case 2: name2.setTextFill(Color.RED);
+            case 2: name2.setTextFill(Paint.valueOf("0000FF"));
                 name1.setTextFill(Color.BLACK);
                 name3.setTextFill(Color.BLACK);
                 name4.setTextFill(Color.BLACK);
                 break;
-            case 3: name3.setTextFill(Color.RED);
+            case 3: name3.setTextFill(Paint.valueOf("0000FF"));
                 name1.setTextFill(Color.BLACK);
                 name2.setTextFill(Color.BLACK);
                 name4.setTextFill(Color.BLACK);
                 break;
-            case 4: name4.setTextFill(Color.RED);
+            case 4: name4.setTextFill(Paint.valueOf("0000FF"));
                 name1.setTextFill(Color.BLACK);
                 name2.setTextFill(Color.BLACK);
                 name3.setTextFill(Color.BLACK);

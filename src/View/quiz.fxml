@@ -4,22 +4,22 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane minHeight="740.0" minWidth="1024.0" prefHeight="740.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ControllerQuiz">
+<Pane minHeight="720.0" minWidth="1024.0" prefHeight="720.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ControllerQuiz">
    <children>
-      <TextArea fx:id="question" editable="false" layoutX="310.0" layoutY="140.0" prefHeight="160.0" prefWidth="600.0" wrapText="true" />
-      <Button fx:id="confirm" layoutX="840.0" layoutY="480.0" mnemonicParsing="false" prefHeight="140.0" prefWidth="120.0" text="Confirma" />
-      <Label fx:id="name1" layoutX="150.0" layoutY="45.0" text="Label" />
-      <Label fx:id="name2" layoutX="350.0" layoutY="45.0" text="Label" />
-      <Label fx:id="name3" layoutX="550.0" layoutY="45.0" text="Label" />
-      <Label fx:id="name4" layoutX="750.0" layoutY="45.0" text="Label" />
-      <ImageView fx:id="pictureRound" fitHeight="150.0" fitWidth="180.0" layoutX="100.0" layoutY="140.0" pickOnBounds="true" preserveRatio="true" />
-      <RadioButton fx:id="option1" layoutX="45.0" layoutY="360.0" maxHeight="58.0" maxWidth="720.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="700.0" text="A" wrapText="true" />
-      <RadioButton fx:id="option2" layoutX="45.0" layoutY="540.0" maxHeight="58.0" maxWidth="720.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="700.0" text="C" wrapText="true" />
-      <RadioButton fx:id="option3" layoutX="45.0" layoutY="450.0" maxHeight="58.0" maxWidth="720.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="700.0" text="B" wrapText="true" />
-      <RadioButton fx:id="option4" layoutX="45.0" layoutY="630.0" maxHeight="58.0" maxWidth="720.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="700.0" text="D" wrapText="true" />
-      <Label fx:id="score1" layoutX="150.0" layoutY="75.0" text="Label" />
-      <Label fx:id="score2" layoutX="350.0" layoutY="75.0" text="Label" />
-      <Label fx:id="score3" layoutX="550.0" layoutY="75.0" text="Label" />
-      <Label fx:id="score4" layoutX="750.0" layoutY="75.0" text="Label" />
+      <Button fx:id="confirm" layoutX="500.0" layoutY="580.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="140.0" text="Confirma" />
+      <Label fx:id="name1" contentDisplay="CENTER" layoutX="22.0" layoutY="61.0" prefHeight="42.0" prefWidth="145.0" text="Label" textAlignment="CENTER" />
+      <Label fx:id="name2" contentDisplay="CENTER" layoutX="22.0" layoutY="231.0" prefHeight="42.0" prefWidth="145.0" text="Label" textAlignment="CENTER" />
+      <Label fx:id="name3" contentDisplay="CENTER" layoutX="22.0" layoutY="401.0" prefHeight="42.0" prefWidth="145.0" text="Label" textAlignment="CENTER" />
+      <Label fx:id="name4" contentDisplay="CENTER" layoutX="22.0" layoutY="571.0" prefHeight="42.0" prefWidth="145.0" text="Label" textAlignment="CENTER" />
+      <ImageView fx:id="pictureRound" fitHeight="150.0" fitWidth="180.0" layoutX="1060.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true" />
+      <RadioButton fx:id="option1" layoutX="220.0" layoutY="220.0" maxHeight="70.0" maxWidth="720.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="700.0" text="A" wrapText="true" />
+      <RadioButton fx:id="option2" layoutX="220.0" layoutY="380.0" maxHeight="70.0" maxWidth="720.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="700.0" text="C" wrapText="true" />
+      <RadioButton fx:id="option3" layoutX="220.0" layoutY="300.0" maxHeight="70.0" maxWidth="720.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="700.0" text="B" wrapText="true" />
+      <RadioButton fx:id="option4" layoutX="220.0" layoutY="460.0" maxHeight="70.0" maxWidth="720.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="700.0" text="D" wrapText="true" />
+      <Label fx:id="score1" layoutX="77.0" layoutY="105.0" text="Label" />
+      <Label fx:id="score2" layoutX="77.0" layoutY="275.0" text="Label" />
+      <Label fx:id="score3" layoutX="77.0" layoutY="445.0" text="Label" />
+      <Label fx:id="score4" layoutX="77.0" layoutY="615.0" text="Label" />
+      <Label fx:id="question" layoutX="200.0" layoutY="50.0" prefHeight="120.0" prefWidth="740.0" textAlignment="JUSTIFY" wrapText="true" />
    </children>
 </Pane>
