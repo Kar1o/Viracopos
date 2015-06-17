@@ -9,11 +9,13 @@ class Main{
 
 class ControllerJogador{
 - btnContinue:Button
+- btnRank:Button
 - choicePlayer:ChoiceBox
 + {static}parameters:String
 
 +initialize(URL, ResourceBundle):void
 - buttonAction(ActionEvent):void
+- buttonRank(ActionEvent):void
 }
 
 class ControllerNome{
@@ -111,8 +113,8 @@ class ConnectData{
 }
 
 class Player{
-+nome:String
-+pontos:int
+-nome:String
+-pontos:int
 
 +Player(String)
 +getNomes():String
@@ -148,6 +150,7 @@ class ControllerQuiz ..> class Player
 class Main "1..1"->"1..1"  ControllerJogador : creates
 class ControllerJogador "1..1"->"1..1" class ControllerNome : creates
 class ControllerNome "1..1"-->"1..1" class ControllerQuiz : creates
-class ControllerQuiz -> class ControllerReport
+class ControllerReport <- class ControllerQuiz
+class ControllerJogador -- class ControllerReport
 
 @enduml

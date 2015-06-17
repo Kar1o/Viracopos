@@ -1,0 +1,11 @@
+@startuml
+
+:Player:
+
+Player --> (Choose Players)
+Player --> (Check Rank List)
+(Choose Players) --> (Choose Name)
+(Choose Name) --> (Answer Quiz)
+(Answer Quiz) --> (Check Rank List)
+(Check Rank List) -> (Choose Players)
+@enduml
