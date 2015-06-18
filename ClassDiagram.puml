@@ -14,7 +14,7 @@ class ControllerJogador{
 + {static}parameters:String
 
 +initialize(URL, ResourceBundle):void
-- buttonAction(ActionEvent):void
+- buttonConfirmaJogador(ActionEvent):void
 - buttonRank(ActionEvent):void
 }
 
@@ -31,7 +31,7 @@ class ControllerNome{
 
 +initialize(URL, ResourceBundle):void
 +{static}warnigMessage(String):void
--buttonAction(ActionEvent):void
+-buttonConfirmaNome(ActionEvent):void
 }
 
 class ControllerQuiz{
@@ -71,7 +71,7 @@ class ControllerQuiz{
 
 
 +initialize(URL, ResourceBundle):void
--buttonAction(ActionEvent):void
+-buttonResponder(ActionEvent):void
 -insertJogadorData():void
 -checkanswer():void
 -assignScoreValue():void
@@ -85,8 +85,10 @@ class ControllerQuiz{
 class ControllerReport{
 -listPlayer:ListView
 -connectData:ConnectData
+-btnStart:Button
 
 +initialize(URL, ResourceBundle):void
+-btnStart():void
 }
 
 }
@@ -147,10 +149,10 @@ class ControllerQuiz ..> class ConnectData
 class ControllerQuiz ..> class Round
 class ControllerQuiz ..> class Player
 
-class Main "1..1"->"1..1"  ControllerJogador : creates
-class ControllerJogador "1..1"->"1..1" class ControllerNome : creates
-class ControllerNome "1..1"-->"1..1" class ControllerQuiz : creates
-class ControllerReport <- class ControllerQuiz
+class Main "1..1"->"1..1"  ControllerJogador
+class ControllerJogador "1..1"->"1..1" class ControllerNome
+class ControllerNome "1..1"-->"1..1" class ControllerQuiz
+class ControllerReport "1..1"<-"1..1" class ControllerQuiz
 class ControllerJogador -- class ControllerReport
 
 @enduml

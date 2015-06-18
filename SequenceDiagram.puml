@@ -3,4 +3,21 @@
 actor Player
 
 
+Main -> ControllerJogador : start()
+ControllerJogador -> ControllerJogador : initialize()
+Player  -> ControllerNome : buttonConfirmaJogador()
+ControllerNome -> ControllerNome : initialize()
+Player -> ControllerQuiz : buttonConfirmaNome()
+ControllerQuiz -> ControllerQuiz : initialize()
+
+database banco
+group loop
+    ControllerQuiz -> banco :selectQuestions()
+    Player -> ControllerQuiz: buttonResponder()
+
+end
+
+
+ControllerQuiz -> banco :insertJogadorData()
+
 @enduml
